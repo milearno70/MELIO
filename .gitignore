@@ -1,0 +1,39 @@
+# ===== Secrets =====
+.env
+.env.*
+!.env.example
+secrets.json
+appsettings.*.local.json
+*.pfx
+*.key
+
+# ===== .NET / ASP.NET Core build output =====
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+
+# ===== Visual Studio / VS Code =====
+.vs/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# ===== Logs və müvəqqəti fayllar =====
+*.log
+logs/
+*.tmp
+
+# ===== Database faylları (lokal) =====
+*.mdf
+*.ldf
+*.bak
+
+# ===== Node (lazım olarsa) =====
+node_modules/
+
+# ===== Windows / macOS =====
+Thumbs.db
+Desktop.ini
+.DS_Store

@@ -1,0 +1,308 @@
+/* =========================================================
+   MELIO — Design System
+   Little Steps, Big Dreams.
+   ========================================================= */
+
+/* ---------- 1. Design tokens (rənglər, ölçülər) ---------- */
+:root {
+  /* Fon rəngləri */
+  --cream: #fff8ec;
+  --ivory: #fffdf7;
+
+  /* Pastel palitra */
+  --pink: #f8c8dc;
+  --blue: #bfe3f7;
+  --lavender: #d9ccf5;
+  --mint: #c9ebd8;
+  --yellow: #fff1b8;
+  --peach: #ffd9c2;
+
+  /* Vurğu (düymə, link, focus) rəngləri */
+  --accent: #d45c8a;
+  --accent-dark: #b8466f;
+  --accent-soft: #fde4ee;
+
+  /* Mətn rəngləri */
+  --ink: #4a3f4b;
+  --ink-soft: #7b6f7d;
+
+  /* Status rəngləri */
+  --success-bg: #dff4e8;
+  --success-text: #2f7a54;
+  --error-bg: #fde0e0;
+  --error-text: #b23a3a;
+
+  /* Fontlar */
+  --font-heading: "Fredoka", "Segoe UI", sans-serif;
+  --font-body: "Nunito", "Segoe UI", sans-serif;
+
+  /* Forma və kölgə */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --shadow-soft: 0 6px 18px rgba(120, 90, 120, 0.12);
+  --shadow-card: 0 10px 30px rgba(120, 90, 120, 0.15);
+
+  /* Məsafələr */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+}
+
+/* ---------- 2. Reset və əsas ayarlar ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--ink);
+  line-height: 1.6;
+  background-color: var(--cream);
+  /* Dəftər nöqtələri (dotted notebook) effekti */
+  background-image: radial-gradient(rgba(212, 92, 138, 0.13) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+/* ---------- 3. Tipoqrafiya ---------- */
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 var(--space-1);
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; }
+
+p {
+  margin: 0 0 var(--space-2);
+}
+
+a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-dark);
+  text-decoration: underline;
+}
+
+.text-soft {
+  color: var(--ink-soft);
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* ---------- 4. Logo ---------- */
+.logo {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin: 0;
+}
+
+.slogan {
+  font-family: var(--font-heading);
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* ---------- 5. Kartlar ---------- */
+.card {
+  position: relative;
+  background-color: var(--ivory);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-4);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Washi tape (kağız lent) dekorasiyası */
+.card--taped::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  width: 110px;
+  height: 28px;
+  transform: translateX(-50%) rotate(-3deg);
+  background-color: var(--yellow);
+  opacity: 0.9;
+  border-radius: 4px;
+  box-shadow: var(--shadow-soft);
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.5) 0 6px,
+    transparent 6px 12px
+  );
+}
+
+/* ---------- 6. Düymələr ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: 0.8rem 1.6rem;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 5px 0 var(--accent-dark);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-dark);
+  color: #ffffff;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ---------- 7. Form elementləri ---------- */
+.form-group {
+  margin-bottom: var(--space-3);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  background-color: #ffffff;
+  border: 2px solid var(--lavender);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-input::placeholder {
+  color: #b5a9b8;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+/* Validation xətası olan input */
+.form-input.is-invalid {
+  border-color: var(--error-text);
+}
+
+/* Input-un altındakı kiçik xəta mətni */
+.field-error {
+  margin: 0.35rem 0 0;
+  min-height: 1.2em;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--error-text);
+}
+
+/* Password input + göz düyməsi üçün sarğı */
+.input-wrap {
+  position: relative;
+}
+
+.input-wrap .form-input {
+  padding-right: 3rem;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 0.6rem;
+  transform: translateY(-50%);
+  padding: 0.3rem 0.5rem;
+  font-size: 1.2rem;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.toggle-password:focus-visible {
+  outline: 3px solid var(--accent-soft);
+}
+
+/* ---------- 8. Alert (error / success) mesajları ---------- */
+.alert {
+  margin-bottom: var(--space-3);
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.alert[hidden] {
+  display: none;
+}
+
+.alert-error {
+  background-color: var(--error-bg);
+  color: var(--error-text);
+}
+
+.alert-success {
+  background-color: var(--success-bg);
+  color: var(--success-text);
+}
+
+/* ---------- 9. Responsive ---------- */
+@media (max-width: 480px) {
+  h1 { font-size: 1.6rem; }
+  .card { padding: var(--space-3); }
+  .logo { font-size: 2rem; }
+}
