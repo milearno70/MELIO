@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | MELIO</title>
+
+    <!-- Google Fonts: Fredoka (başlıqlar) və Nunito (mətn) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Əvvəl ortaq dizayn sistemi, sonra bu səhifəyə aid stillər -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body class="auth-page">
+
+    <!-- Dekorativ elementlər (ekran oxuyucular üçün gizlidir) -->
+    <span class="deco deco-star deco-1" aria-hidden="true">✦</span>
+    <span class="deco deco-star deco-2" aria-hidden="true">✧</span>
+    <span class="deco deco-star deco-3" aria-hidden="true">✦</span>
+
+    <main class="auth-container">
+        <div class="card card--taped">
+
+            <header class="auth-header">
+                <h1 class="logo">MELIO</h1>
+                <p class="slogan">Little Steps, Big Dreams.</p>
+            </header>
+
+            <h2 class="auth-title">Welcome back</h2>
+            <p class="text-soft auth-subtitle">Log in to continue your study journey.</p>
+
+            <!-- Mesaj blokları: JavaScript sonra göstərəcək -->
+            <div id="form-error" class="alert alert-error" role="alert" hidden></div>
+            <div id="form-success" class="alert alert-success" role="status" hidden></div>
+
+            <form id="login-form" novalidate>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-input" type="email" id="email" name="email" placeholder="you@example.com"
+                        autocomplete="email">
+                    <p class="field-error" id="email-error"></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <div class="input-wrap">
+                        <input class="form-input" type="password" id="password" name="password"
+                            placeholder="Enter your password" autocomplete="current-password">
+                        <button class="toggle-password" type="button" id="toggle-password"
+                            aria-label="Show password">👁</button>
+                    </div>
+                    <p class="field-error" id="password-error"></p>
+                </div>
+
+                <button class="btn btn-primary btn-block" type="submit">Login</button>
+            </form>
+
+            <p class="auth-switch text-center">
+                New to MELIO? <a href="register.html">Create an account</a>
+            </p>
+
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+</body>
+
+</html>

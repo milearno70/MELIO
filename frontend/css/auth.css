@@ -1,0 +1,67 @@
+/* =========================================================
+   MELIO — Auth səhifələri (Login və Register)
+   Yalnız bu səhifələrə aid düzülüş və dekorasiya.
+   Rənglər və komponentlər style.css-dən gəlir.
+   ========================================================= */
+
+/* ---------- Səhifə düzülüşü ---------- */
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-2);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Kartın içi ---------- */
+.auth-header {
+  text-align: center;
+  margin-bottom: var(--space-3);
+}
+
+.auth-title {
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+
+.auth-subtitle {
+  text-align: center;
+  margin-bottom: var(--space-3);
+}
+
+.auth-switch {
+  margin: var(--space-3) 0 0;
+  color: var(--ink-soft);
+}
+
+/* ---------- Dekorativ ulduzlar ---------- */
+.deco {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.deco-star {
+  color: var(--accent);
+  opacity: 0.45;
+}
+
+.deco-1 { top: 8%;  left: 10%;  font-size: 2.2rem; transform: rotate(-12deg); }
+.deco-2 { top: 18%; right: 12%; font-size: 1.8rem; color: #8f7bd1; }
+.deco-3 { bottom: 12%; left: 16%; font-size: 1.6rem; color: #5bb3dd; }
+
+/* ---------- Kiçik ekran ---------- */
+@media (max-width: 480px) {
+  .deco-1 { top: 3%; left: 5%; }
+  .deco-2 { top: 6%; right: 6%; }
+  .deco-3 { display: none; }
+}
