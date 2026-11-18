@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Test</title>
+    <style>
+        body {
+            background: #fff8ec;
+            font-family: sans-serif;
+            color: #4a3f4b;
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            padding: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .pet {
+            position: relative;
+            width: 384px;
+            height: 384px;
+            background: #fffdf7;
+            border-radius: 24px;
+        }
+
+        .pet img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated;
+        }
+
+        .controls {
+            max-width: 380px;
+        }
+
+        .group {
+            margin-bottom: 1.2rem;
+        }
+
+        .group h3 {
+            margin: 0 0 .5rem;
+            font-size: 1rem;
+        }
+
+        .row {
+            display: flex;
+            gap: .5rem;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: .45rem .8rem;
+            border: 2px solid #d9ccf5;
+            border-radius: 12px;
+            background: #fff;
+            cursor: pointer;
+            font-size: .95rem;
+        }
+
+        button.active {
+            border-color: #d45c8a;
+            background: #fde4ee;
+        }
+
+        .swatch {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            border-radius: 50%;
+        }
+
+        #color-group[hidden] {
+            display: none;
+        }
+
+        #info {
+            font-size: .85rem;
+            color: #7b6f7d;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pet">
+        <img id="layer-body" alt="">
+        <img id="layer-clothes" alt="">
+        <img id="layer-face" alt="">
+        <img id="layer-hair" alt="">
+    </div>
+
+    <div class="controls">
+        <div class="group">
+            <h3>Dəri</h3>
+            <div class="row" id="skin-row"></div>
+        </div>
+        <div class="group">
+            <h3>Geyim</h3>
+            <div class="row" id="clothes-row"></div>
+        </div>
+        <div class="group">
+            <h3>Üz</h3>
+            <div class="row" id="face-row"></div>
+        </div>
+        <div class="group">
+            <h3>1. Saç tipi</h3>
+            <div class="row" id="hair-style-row"></div>
+        </div>
+        <div class="group" id="color-group" hidden>
+            <h3>2. Saç rəngi</h3>
+            <div class="row" id="hair-color-row"></div>
+        </div>
+        <p id="info"></p>
+    </div>
+
+    <script>
+        const BASE = "assets/images/pet";
+
+        const state = { gender: "girl", skin: 1, clothes: 1, face: 1, hairStyle: null, hairColor: null };
+
+        const skins = [1, 2, 3, 4];
+        const clothes = [1, 2, 3, 4, 5];
+        const faces = [1, 2, 3, 4];
+        const hairStyles = [1, 2, 3, 4, 5];
+        const hairColors = [
+            { name: "black", hex: "#2f2a33" }, { name: "blue", hex: "#6aa7e0" },
+            { name: "brown", hex: "#5b4036" }, { name: "orange", hex: "#e8924a" },
+            { name: "purple", hex: "#9c7bd1" }, { name: "red", hex: "#c94a4a" },
+            { name: "white", hex: "#f3f0f0" }, { name: "yellow", hex: "#f0d36b" }
+        ];
+
+        function setLayer(id, src) {
+            const img = document.getElementById(id);
+            img.style.visibility = "visible";
+            img.onerror = () => { img.style.visibility = "hidden"; };
+            img.src = src;
+        }
+
+        function render() {
+            const g = `${BASE}/${state.gender}`;
+            setLayer("layer-body", `${g}/body/body-skin-${state.skin}.png`);
+            setLayer("layer-clothes", `${g}/clothes/clothes-${state.clothes}.png`);
+            setLayer("layer-face", `${g}/face/face-${state.face}.png`);
+            const hair = document.getElementById("layer-hair");
+            if (state.hairStyle && state.hairColor) {
+                setLayer("layer-hair", `${g}/hair/hair-${state.hairColor}-${state.hairStyle}.png`);
+            } else {
+                hair.style.visibility = "hidden";
+            }
+            document.getElementById("color-group").hidden = !state.hairStyle;
+            document.getElementById("info").textContent =
+                `skin ${state.skin} · clothes ${state.clothes} · face ${state.face} · hair ${state.hairStyle ?? "-"} / ${state.hairColor ?? "-"}`;
+            renderButtons();
+        }
+
+        function addButton(rowId, label, active, onClick, hex) {
+            const b = document.createElement("button");
+            if (hex) { b.className = "swatch"; b.style.background = hex; b.title = label; }
+            else { b.textContent = label; }
+            if (active) b.classList.add("active");
+            b.addEventListener("click", onClick);
+            document.getElementById(rowId).appendChild(b);
+        }
+
+        function renderButtons() {
+            ["skin-row", "clothes-row", "face-row", "hair-style-row", "hair-color-row"]
+                .forEach(id => document.getElementById(id).innerHTML = "");
+
+            skins.forEach(n => addButton("skin-row", "Dəri " + n, state.skin === n, () => { state.skin = n; render(); }));
+            clothes.forEach(n => addButton("clothes-row", "Geyim " + n, state.clothes === n, () => { state.clothes = n; render(); }));
+            faces.forEach(n => addButton("face-row", "Üz " + n, state.face === n, () => { state.face = n; render(); }));
+
+            hairStyles.forEach(n => addButton("hair-style-row", "Tip " + n, state.hairStyle === n, () => {
+                state.hairStyle = n;
+                if (!state.hairColor) state.hairColor = "brown";
+                render();
+            }));
+            hairColors.forEach(c => addButton("hair-color-row", c.name, state.hairColor === c.name,
+                () => { state.hairColor = c.name; render(); }, c.hex));
+        }
+
+        render();
+    </script>
+</body>
+
+</html>

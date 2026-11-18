@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff8ee">
+  <title>Dashboard | MELIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="dashboard-page">
+  <div class="dashboard-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <a class="sidebar-brand" href="index.html" aria-label="MELIO home">
+        <img src="assets/images/logo2.png" alt="MELIO" class="sidebar-logo">
+      </a>
+
+      <button class="sidebar-toggle" id="sidebar-toggle" type="button" aria-label="Collapse sidebar" aria-expanded="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5 7.5 12l7 7"/></svg>
+      </button>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link active" href="index.html" data-page="dashboard" title="Dashboard">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 10 8.5-7 8.5 7v10a1 1 0 0 1-1 1h-5.2v-6.5H9.7V21H4.5a1 1 0 0 1-1-1z"/></svg><span>Dashboard</span>
+        </a>
+        <a class="nav-link" href="#pomodoro" data-page="pomodoro" title="Pomodoro">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8.2"/><path d="M12 8v5l3 2M9 2h6M12 2v2"/></svg><span>Pomodoro</span>
+        </a>
+        <a class="nav-link" href="#library" data-page="library" title="My Library">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5zM4 4.5v17M8 6h8M8 10h7"/></svg><span>My Library</span>
+        </a>
+        <a class="nav-link" href="#notes" data-page="notes" title="Notes">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM14 3v5h5M8 12h8M8 16h8"/></svg><span>Notes</span>
+        </a>
+        <a class="nav-link" href="#tracking" data-page="tracking" title="Study Tracking">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h17M8 16v-5M13 16V7M18 16V3"/></svg><span>Study Tracking</span>
+        </a>
+        <a class="nav-link" href="#pet" data-page="pet" title="Pet & Rewards">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-8-4.6-8-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.4-8 10-8 10z"/><path d="m8.5 12 2 2 4-4"/></svg><span>Pet &amp; Rewards</span>
+        </a>
+        <a class="nav-link" href="#tasks" data-page="tasks" title="Tasks">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5h11M9 12h11M9 19h11M3.5 5l1.2 1.2L7 4M3.5 12l1.2 1.2L7 11M3.5 19l1.2 1.2L7 18"/></svg><span>Tasks</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <a class="nav-link" href="#settings" data-page="settings" title="Settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.1 1.8-1.8 3.1-2.1-.5a8 8 0 0 1-1.7 1l-.4 2.1h-3.6l-.4-2.1a8 8 0 0 1-1.7-1l-2.1.5L5 16.9l1.1-1.8a8 8 0 0 1 0-2l-1.1-1.8 1.8-3.1 2.1.5a8 8 0 0 1 1.7-1l.4-2.1h3.6l.4 2.1a8 8 0 0 1 1.7 1l2.1-.5 1.8 3.1-1.1 1.8a8 8 0 0 1 0 2z"/></svg><span>Settings</span>
+        </a>
+        <div class="profile-mini">
+          <div class="profile-avatar">M</div>
+          <div class="profile-copy"><strong>Mely</strong><span>Level 3 learner</span></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+      <header class="topbar">
+        <div class="topbar-copy">
+          <span class="today-date" id="today-date">Tuesday, November 10</span>
+          <p class="topbar-slogan">Little Steps, Big Dreams.</p>
+        </div>
+        <div class="topbar-actions">
+          <label class="search-box">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg>
+            <input id="dashboard-search" type="search" placeholder="Search your study universe" aria-label="Search dashboard">
+          </label>
+          <button class="icon-button notification-button" type="button" aria-label="Notifications">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><i></i>
+          </button>
+          <div class="points-chip"><span class="star">✦</span><strong id="points-total">5 pts</strong></div>
+        </div>
+      </header>
+
+      <section class="welcome-row">
+        <div>
+          <p class="eyebrow">YOUR LITTLE STUDY UNIVERSE</p>
+          <h1>HAII, MELY! <span class="wave">✿</span></h1>
+          <p class="welcome-subtitle">Ready to make today a little brighter?</p>
+        </div>
+        <div class="welcome-sticker" aria-hidden="true">♡ <span>you've got this!</span> ✧</div>
+      </section>
+
+      <section class="dashboard-grid" aria-label="Dashboard overview">
+        <article class="dash-card study-buddy-card" id="pet">
+          <div class="card-heading">
+            <div><span class="card-kicker">YOUR STUDY COMPANION</span><h2>Study buddy</h2></div>
+            <span class="soft-pill mint-pill">● Happy</span>
+          </div>
+          <div class="buddy-content">
+            <div class="buddy-art">
+              <span class="buddy-spark spark-one">✦</span><span class="buddy-spark spark-two">♡</span>
+              <img src="assets/images/pet/dashboard pet.png" alt="Your study pet, Mochi" onerror="this.src='assets/images/pet/pet1.png'">
+              <span class="buddy-name">Mochi</span>
+            </div>
+            <div class="buddy-stats">
+              <p class="buddy-message">Mochi is cheering you on! Keep going, you're doing great.</p>
+              <div class="stat-line"><div class="stat-label"><span>Happiness</span><strong>80%</strong></div><div class="progress-track pink-track"><span style="width:80%"></span></div></div>
+              <div class="stat-line"><div class="stat-label"><span>Energy</span><strong>65%</strong></div><div class="progress-track yellow-track"><span style="width:65%"></span></div></div>
+              <div class="stat-line"><div class="stat-label"><span>XP to next level</span><strong>120 / 200</strong></div><div class="progress-track blue-track"><span style="width:60%"></span></div></div>
+              <div class="buddy-actions">
+                <button class="pet-action" data-pet-action="Feed"><span>♡</span>Feed</button>
+                <button class="pet-action" data-pet-action="Play"><span>✧</span>Play</button>
+                <button class="pet-action" data-pet-action="Nap"><span>☾</span>Nap</button>
+                <button class="pet-action" data-pet-action="Visit"><span>⌂</span>Visit</button>
+              </div>
+              <p class="pet-feedback" id="pet-feedback" aria-live="polite">Mochi is waiting for you!</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="dash-card today-page-card">
+          <div class="card-heading"><div><span class="card-kicker">A FRESH START</span><h2>Today's page</h2></div><span class="tiny-flower">✿</span></div>
+          <div class="page-date"><span id="page-day">10</span><div><strong id="page-month">NOVEMBER</strong><small id="page-weekday">TUESDAY</small></div></div>
+          <div class="page-note">A new day is a new chance to grow.</div>
+          <div class="page-divider"></div>
+          <div class="page-goal"><span class="goal-icon">✧</span><div><small>YOUR DAILY INTENTION</small><strong>Little progress is still progress.</strong></div></div>
+          <div class="page-bottom"><span>MAKE TODAY COUNT</span><span>♡</span></div>
+        </article>
+
+        <article class="dash-card pomodoro-card" id="pomodoro">
+          <div class="card-heading"><div><span class="card-kicker">TIME TO FOCUS</span><h2>Pomodoro</h2></div><span class="timer-icon">◷</span></div>
+          <div class="timer-tabs" role="group" aria-label="Timer mode">
+            <button class="timer-tab active" data-minutes="25" data-mode="Focus">Focus</button>
+            <button class="timer-tab" data-minutes="5" data-mode="Short break">Short break</button>
+            <button class="timer-tab" data-minutes="15" data-mode="Long break">Long break</button>
+          </div>
+          <div class="timer-face">
+            <svg class="timer-ring" viewBox="0 0 220 220" aria-hidden="true"><circle class="ring-bg" cx="110" cy="110" r="96"/><circle class="ring-progress" id="timer-progress" cx="110" cy="110" r="96"/></svg>
+            <div class="timer-center"><span id="timer-mode">FOCUS SESSION</span><strong id="timer-display">25:00</strong><small>you can do it ♡</small></div>
+          </div>
+          <div class="timer-controls"><button class="primary-button" id="timer-start">Start focus</button><button class="reset-button" id="timer-reset" aria-label="Reset timer">↻</button></div>
+          <p class="timer-caption" id="timer-caption">One thing at a time. You've got this!</p>
+        </article>
+
+        <article class="dash-card tasks-card" id="tasks">
+          <div class="card-heading"><div><span class="card-kicker">YOUR PLAN FOR TODAY</span><h2>Today's tasks</h2></div><button class="text-link" id="add-task-button" type="button">+ Add task</button></div>
+          <div class="task-summary"><span id="task-count">2 of 4 completed</span><div class="progress-track task-progress"><span id="task-progress-fill" style="width:50%"></span></div></div>
+          <form class="quick-task-form" id="quick-task-form" hidden><input id="new-task-input" type="text" maxlength="70" placeholder="What do you need to do?" aria-label="New task"><button type="submit">Add</button></form>
+          <ul class="task-list" id="task-list">
+            <li class="task-item completed"><label><input type="checkbox" checked><span class="custom-check"></span><span class="task-text">Review lecture notes</span></label><span class="task-tag tag-lavender">Study</span></li>
+            <li class="task-item completed"><label><input type="checkbox" checked><span class="custom-check"></span><span class="task-text">Read 10 pages</span></label><span class="task-tag tag-blue">Reading</span></li>
+            <li class="task-item"><label><input type="checkbox"><span class="custom-check"></span><span class="task-text">Practice JavaScript</span></label><span class="task-tag tag-mint">Practice</span></li>
+            <li class="task-item"><label><input type="checkbox"><span class="custom-check"></span><span class="task-text">Prepare tomorrow's plan</span></label><span class="task-tag tag-peach">Personal</span></li>
+          </ul>
+          <div class="task-footer"><span>Small steps add up</span><span>✧</span></div>
+        </article>
+
+        <article class="dash-card little-wins-card">
+          <div class="card-heading"><div><span class="card-kicker">CELEBRATE YOURSELF</span><h2>Little wins</h2></div><span class="win-icon">✧</span></div>
+          <div class="wins-number"><strong id="wins-number">2</strong><span>little wins today</span></div>
+          <div class="win-row"><span class="win-check">✓</span><span>Showed up for yourself</span></div>
+          <div class="win-row"><span class="win-check">✓</span><span>Finished a study session</span></div>
+          <p class="wins-quote">Every tiny step deserves a little celebration. ♡</p>
+        </article>
+
+        <article class="dash-card week-card">
+          <div class="card-heading"><div><span class="card-kicker">YOUR CONSISTENCY</span><h2>This week</h2></div><span class="week-total"><strong>8.5h</strong><small>total study time</small></span></div>
+          <div class="week-chart" aria-label="Weekly study hours">
+            <div class="chart-column"><span class="bar-value">1.5h</span><div class="chart-bar" style="height:48%"></div><small>Mon</small></div>
+            <div class="chart-column"><span class="bar-value">2h</span><div class="chart-bar" style="height:65%"></div><small>Tue</small></div>
+            <div class="chart-column"><span class="bar-value">1h</span><div class="chart-bar" style="height:34%"></div><small>Wed</small></div>
+            <div class="chart-column"><span class="bar-value">2.5h</span><div class="chart-bar today-bar" style="height:82%"></div><small>Thu</small></div>
+            <div class="chart-column"><span class="bar-value">0.5h</span><div class="chart-bar" style="height:20%"></div><small>Fri</small></div>
+            <div class="chart-column"><span class="bar-value">1h</span><div class="chart-bar" style="height:34%"></div><small>Sat</small></div>
+            <div class="chart-column"><span class="bar-value">—</span><div class="chart-bar empty-bar" style="height:8%"></div><small>Sun</small></div>
+          </div>
+          <div class="chart-legend"><span><i></i> Study hours</span><span>You're making progress!</span></div>
+        </article>
+
+        <article class="dash-card subjects-card" id="tracking">
+          <div class="card-heading"><div><span class="card-kicker">KEEP LEARNING</span><h2>Subjects</h2></div><a class="text-link" href="#tracking">View all</a></div>
+          <div class="subject-row"><div class="subject-icon subject-purple">⌘</div><div class="subject-info"><strong>Programming</strong><div class="progress-track"><span style="width:72%"></span></div></div><b>72%</b></div>
+          <div class="subject-row"><div class="subject-icon subject-blue">文</div><div class="subject-info"><strong>English</strong><div class="progress-track blue-track"><span style="width:56%"></span></div></div><b>56%</b></div>
+          <div class="subject-row"><div class="subject-icon subject-pink">∑</div><div class="subject-info"><strong>Mathematics</strong><div class="progress-track pink-track"><span style="width:38%"></span></div></div><b>38%</b></div>
+          <div class="subject-row"><div class="subject-icon subject-mint">✎</div><div class="subject-info"><strong>UI / UX Design</strong><div class="progress-track mint-track"><span style="width:84%"></span></div></div><b>84%</b></div>
+        </article>
+
+        <article class="dash-card upcoming-card">
+          <div class="card-heading"><div><span class="card-kicker">DON'T FORGET</span><h2>Coming up</h2></div><a class="text-link" href="#tasks">See schedule</a></div>
+          <div class="upcoming-item"><div class="upcoming-date"><strong>12</strong><small>NOV</small></div><div class="upcoming-copy"><strong>Database Systems — Quiz</strong><span>Thursday · 10:00 AM</span></div><span class="event-dot lavender-dot"></span></div>
+          <div class="upcoming-item"><div class="upcoming-date blue-date"><strong>14</strong><small>NOV</small></div><div class="upcoming-copy"><strong>UI Design project</strong><span>Saturday · 02:00 PM</span></div><span class="event-dot blue-dot"></span></div>
+          <div class="upcoming-item"><div class="upcoming-date peach-date"><strong>17</strong><small>NOV</small></div><div class="upcoming-copy"><strong>English speaking practice</strong><span>Tuesday · 04:30 PM</span></div><span class="event-dot peach-dot"></span></div>
+        </article>
+
+        <article class="dash-card streak-card">
+          <div class="card-heading"><div><span class="card-kicker">YOUR DAILY MAGIC</span><h2>Study streak</h2></div><span class="streak-flame">✦</span></div>
+          <div class="streak-number"><strong>4</strong><span>days in a row!</span></div>
+          <div class="streak-days"><span class="streak-done">M</span><span class="streak-done">T</span><span class="streak-done">W</span><span class="streak-done">T</span><span>F</span><span>S</span><span>S</span></div>
+          <p class="streak-message">Keep your lovely momentum going.</p>
+        </article>
+      </section>
+      <footer class="dashboard-footer">Made with a little love and lots of little steps <span>♡</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/sidebar.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

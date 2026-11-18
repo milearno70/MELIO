@@ -1,0 +1,8 @@
+/* Dashboard page-specific refinements */
+.dashboard-page h1, .dashboard-page h2, .dashboard-page p { letter-spacing:normal; }
+.dashboard-page a:focus-visible, .dashboard-page button:focus-visible, .dashboard-page input:focus-visible {
+  outline:3px solid rgba(140,199,230,.7); outline-offset:2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; }
+}
