@@ -1,10 +1,12 @@
+import { apiRequest, setAuthToken } from "./api.js";
+
 (() => {
   const form = document.getElementById("login-form");
   if (!form) return;
 
   const email = document.getElementById("email");
   const password = document.getElementById("password");
-  const toggle = document.getElementById("toggle-password");
+  const toggle = form.querySelector('[data-toggle-password="password"]');
   const formError = document.getElementById("form-error");
   const formSuccess = document.getElementById("form-success");
 
@@ -42,14 +44,16 @@
     });
   });
 
-  toggle.addEventListener("click", () => {
-    const show = password.type === "password";
-    password.type = show ? "text" : "password";
-    toggle.setAttribute("aria-label", show ? "Hide password" : "Show password");
-    toggle.setAttribute("aria-pressed", String(show));
-  });
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      const show = password.type === "password";
+      password.type = show ? "text" : "password";
+      toggle.setAttribute("aria-label", show ? "Hide password" : "Show password");
+      toggle.setAttribute("aria-pressed", String(show));
+    });
+  }
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     hideAlerts();
 
@@ -59,8 +63,41 @@
       return;
     }
 
-    // TODO: backend hazır olanda burada POST /api/auth/login çağırılacaq.
-    formError.textContent = "Login isn't available yet. Please try again later.";
-    formError.hidden = false;
+    const submitButton = form.querySelector('[type="submit"]');
+    const originalButtonText = submitButton ? submitButton.textContent : "";
+    const rememberMe = form.querySelector("#remember-me");
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Signing in…";
+    }
+    form.setAttribute("aria-busy", "true");
+
+    try {
+      const result = await apiRequest("/api/auth/login", {
+        method: "POST",
+        body: JSON.stringify({
+          email: email.value.trim(),
+          password: password.value
+        })
+      });
+
+      if (!result || typeof result.accessToken !== "string" || !result.accessToken) {
+        throw new Error("The server returned an invalid sign-in response.");
+      }
+
+      setAuthToken(result.accessToken, Boolean(rememberMe && rememberMe.checked));
+      window.location.assign("index.html");
+    } catch (error) {
+      formError.textContent = error instanceof Error
+        ? error.message
+        : "Unable to sign in. Please try again.";
+      formError.hidden = false;
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      }
+      form.removeAttribute("aria-busy");
+    }
   });
 })();
