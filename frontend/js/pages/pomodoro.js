@@ -65,7 +65,7 @@ function initializePomodoro(root) {
   const completedFocusSessions = () => sessions.filter((session) => !session.sample).length;
   let mode = "focus";
   let remainingSeconds = settings.focus * 60;
-  let startedAt = null;
+  let endsAt = null;
   let intervalId = null;
   let isRunning = false;
 
@@ -127,8 +127,10 @@ function initializePomodoro(root) {
     dial.style.setProperty("--timer-progress", `${Math.max(0, Math.min(360, progress))}deg`);
     dial.setAttribute("aria-label", `${formatTime(remainingSeconds)} remaining, ${MODE_LABELS[mode]}`);
     startButton.querySelector("[data-start-label]").textContent = isRunning
-      ? "Focus is on"
-      : remainingSeconds < total ? "Resume" : "Start focus";
+      ? "Timer is running"
+      : remainingSeconds < total
+        ? `Resume ${mode === "focus" ? "focus" : "break"}`
+        : `Start ${mode === "focus" ? "focus" : "break"}`;
     startButton.disabled = isRunning;
     pauseButton.disabled = !isRunning;
     subjectSelect.disabled = isRunning;
@@ -153,7 +155,7 @@ function initializePomodoro(root) {
     isRunning = false;
     mode = nextMode;
     remainingSeconds = durationFor(mode);
-    startedAt = null;
+    endsAt = null;
     if (message) status.textContent = message;
     render();
   }
@@ -162,6 +164,7 @@ function initializePomodoro(root) {
     stopInterval();
     isRunning = false;
     remainingSeconds = 0;
+    endsAt = null;
     if (mode === "focus") {
       sessions.push({
         id: `session-${Date.now()}`,
@@ -184,13 +187,12 @@ function initializePomodoro(root) {
       mode = "focus";
     }
     remainingSeconds = durationFor(mode);
-    startedAt = null;
     render();
   }
 
   function tick() {
-    if (!isRunning || startedAt === null) return;
-    remainingSeconds = Math.max(0, Math.ceil((startedAt + durationFor(mode) * 1000 - Date.now()) / 1000));
+    if (!isRunning || endsAt === null) return;
+    remainingSeconds = Math.max(0, Math.ceil((endsAt - Date.now()) / 1000));
     if (remainingSeconds <= 0) {
       completeTimer();
       return;
@@ -201,7 +203,7 @@ function initializePomodoro(root) {
   function startTimer() {
     if (isRunning) return;
     if (remainingSeconds <= 0) remainingSeconds = durationFor(mode);
-    startedAt = Date.now() - (durationFor(mode) - remainingSeconds) * 1000;
+    endsAt = Date.now() + remainingSeconds * 1000;
     isRunning = true;
     status.textContent = `${MODE_LABELS[mode]} in progress. One small step at a time.`;
     stopInterval();
@@ -210,10 +212,10 @@ function initializePomodoro(root) {
   }
 
   function pauseTimer() {
-    if (!isRunning || startedAt === null) return;
-    remainingSeconds = Math.max(0, Math.ceil((startedAt + durationFor(mode) * 1000 - Date.now()) / 1000));
+    if (!isRunning || endsAt === null) return;
+    remainingSeconds = Math.max(0, Math.ceil((endsAt - Date.now()) / 1000));
     isRunning = false;
-    startedAt = null;
+    endsAt = null;
     stopInterval();
     status.textContent = "Paused. Your place is saved.";
     render();
@@ -222,7 +224,7 @@ function initializePomodoro(root) {
   function resetTimer() {
     stopInterval();
     isRunning = false;
-    startedAt = null;
+    endsAt = null;
     remainingSeconds = durationFor(mode);
     status.textContent = "Timer reset. Ready when you are.";
     render();
@@ -261,6 +263,9 @@ function initializePomodoro(root) {
   startButton.addEventListener("click", startTimer);
   pauseButton.addEventListener("click", pauseTimer);
   page.querySelector("[data-reset]").addEventListener("click", resetTimer);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") tick();
+  });
 
   renderSettings();
   renderSessions();

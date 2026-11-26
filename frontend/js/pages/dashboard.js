@@ -1,6 +1,9 @@
 import { icon } from "../components/icons.js";
 
-export function initializeDashboard(root) {
+export function initializeDashboard(root, currentUser) {
+  const greeting = root.querySelector("#dashboard-title");
+  greeting.textContent = `Haii, ${currentUser.name}!`;
+
   root.querySelectorAll("[data-dashboard-icon]").forEach((element) => {
     element.innerHTML = icon(element.dataset.dashboardIcon);
   });

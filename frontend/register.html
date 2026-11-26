@@ -44,29 +44,44 @@
         <h1 class="auth-title" id="register-title">Create your account</h1>
         <p class="text-soft auth-subtitle">Start your own little study journal.</p>
 
-        <form id="register-form" method="post">
+        <div id="form-error" class="alert alert-error" role="alert" hidden></div>
+        <div id="form-success" class="alert alert-success" role="status" hidden></div>
+
+        <form id="register-form" method="post" novalidate>
           <div class="form-group">
             <label class="form-label" for="display-name">Your name</label>
             <input class="form-input" type="text" id="display-name" name="displayName"
               placeholder="What should we call you?" autocomplete="name" required>
+            <p class="field-error" id="name-error"></p>
           </div>
 
           <div class="form-group">
             <label class="form-label" for="register-email">Email</label>
             <input class="form-input" type="email" id="register-email" name="email"
               placeholder="you@example.com" autocomplete="email" required>
+            <p class="field-error" id="email-error"></p>
           </div>
 
-          <div class="form-group">
+          <div class="form-group form-group--password">
             <label class="form-label" for="register-password">Password</label>
-            <input class="form-input" type="password" id="register-password" name="password"
-              placeholder="At least 8 characters" autocomplete="new-password" minlength="8" required>
+            <div class="input-wrap">
+              <input class="form-input" type="password" id="register-password" name="password"
+                placeholder="At least 8 characters" autocomplete="new-password" minlength="8" required>
+              <button class="toggle-password" type="button" data-toggle-password="register-password"
+                aria-label="Show password">👁</button>
+            </div>
+            <p class="field-error" id="password-error"></p>
           </div>
 
-          <div class="form-group">
+          <div class="form-group form-group--password">
             <label class="form-label" for="confirm-password">Confirm password</label>
-            <input class="form-input" type="password" id="confirm-password" name="confirmPassword"
-              placeholder="Type your password again" autocomplete="new-password" minlength="8" required>
+            <div class="input-wrap">
+              <input class="form-input" type="password" id="confirm-password" name="confirmPassword"
+                placeholder="Type your password again" autocomplete="new-password" minlength="8" required>
+              <button class="toggle-password" type="button" data-toggle-password="confirm-password"
+                aria-label="Show password">👁</button>
+            </div>
+            <p class="field-error" id="confirm-password-error"></p>
           </div>
 
           <button class="btn btn-primary btn-block" type="submit">Create account</button>
@@ -77,6 +92,6 @@
     </section>
   </main>
 
-  <script src="js/auth.js"></script>
+  <script type="module" src="js/auth.js"></script>
 </body>
 </html>

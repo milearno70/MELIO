@@ -1,7 +1,25 @@
 import { mountAppShell } from "./components/app-shell.js";
 import { initializeDashboard } from "./pages/dashboard.js";
+import { ApiError, apiRequest, clearAuthToken, getAuthToken } from "./api.js";
 
 async function startDashboard() {
+  if (!getAuthToken()) {
+    window.location.replace("login.html");
+    return;
+  }
+
+  let currentUser;
+  try {
+    currentUser = await apiRequest("/api/auth/me");
+  } catch (error) {
+    if (error instanceof ApiError && error.status === 401) {
+      clearAuthToken();
+      window.location.replace("login.html");
+      return;
+    }
+    throw error;
+  }
+
   const root = document.querySelector("#app-root");
   const contentTemplate = document.querySelector("#dashboard-template");
 
@@ -14,7 +32,7 @@ async function startDashboard() {
     contentTemplate,
     activePage: "dashboard"
   });
-  initializeDashboard(root);
+  initializeDashboard(root, currentUser);
 }
 
 startDashboard().catch((error) => {

@@ -47,7 +47,7 @@
         <div id="form-error" class="alert alert-error" role="alert" hidden></div>
         <div id="form-success" class="alert alert-success" role="status" hidden></div>
 
-        <form id="login-form" method="post">
+        <form id="login-form" method="post" novalidate>
           <div class="form-group">
             <label class="form-label" for="email">Email</label>
             <input class="form-input" type="email" id="email" name="email" placeholder="you@example.com"
@@ -60,7 +60,7 @@
             <div class="input-wrap">
               <input class="form-input" type="password" id="password" name="password"
                 placeholder="Enter your password" autocomplete="current-password" required>
-              <button class="toggle-password" type="button" id="toggle-password" aria-label="Show password">👁</button>
+              <button class="toggle-password" type="button" data-toggle-password="password" aria-label="Show password">👁</button>
             </div>
             <p class="field-error" id="password-error"></p>
           </div>
@@ -81,6 +81,6 @@
     </section>
   </main>
 
-  <script src="js/auth.js"></script>
+  <script type="module" src="js/auth.js"></script>
 </body>
 </html>
