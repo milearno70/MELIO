@@ -43,7 +43,9 @@ export async function initializeDashboard(root, currentUser) {
       completeButton.className = "task-row__check";
       completeButton.type = "button";
       completeButton.textContent = task.isCompleted ? "✓" : "";
-      completeButton.setAttribute("aria-label", `${task.isCompleted ? "Mark" : "Complete"} ${task.title}`);
+      completeButton.setAttribute("aria-label", task.isCompleted
+        ? `Mark ${task.title} incomplete`
+        : `Complete ${task.title}`);
       completeButton.setAttribute("aria-pressed", String(task.isCompleted));
       completeButton.addEventListener("click", () => updateTask(task, completeButton));
 
@@ -83,8 +85,10 @@ export async function initializeDashboard(root, currentUser) {
     loadingMessage.textContent = "Loading your tasks…";
     loadingMessage.hidden = false;
     errorMessage.hidden = true;
+    emptyMessage.hidden = true;
     taskList.setAttribute("aria-busy", "true");
     submitButton.disabled = true;
+    retryButton.disabled = true;
     try {
       const result = await apiRequest("/api/tasks");
       if (!Array.isArray(result)) throw new Error("The task response was not a list.");
@@ -96,11 +100,15 @@ export async function initializeDashboard(root, currentUser) {
       loadingMessage.hidden = true;
       taskList.setAttribute("aria-busy", "false");
       submitButton.disabled = false;
+      retryButton.disabled = false;
     }
   }
 
   async function updateTask(task, button) {
+    const originalLabel = button.getAttribute("aria-label");
     button.disabled = true;
+    button.setAttribute("aria-busy", "true");
+    button.setAttribute("aria-label", `Updating ${task.title}`);
     errorMessage.hidden = true;
     try {
       const updatedTask = await apiRequest(`/api/tasks/${task.id}`, {
@@ -112,11 +120,15 @@ export async function initializeDashboard(root, currentUser) {
     } catch (error) {
       showError(error, "update");
       button.disabled = false;
+      button.removeAttribute("aria-busy");
+      button.setAttribute("aria-label", originalLabel);
     }
   }
 
   async function deleteTask(task, button) {
     button.disabled = true;
+    button.setAttribute("aria-busy", "true");
+    button.setAttribute("aria-label", `Deleting ${task.title}`);
     errorMessage.hidden = true;
     try {
       await apiRequest(`/api/tasks/${task.id}`, { method: "DELETE" });
@@ -125,6 +137,8 @@ export async function initializeDashboard(root, currentUser) {
     } catch (error) {
       showError(error, "delete");
       button.disabled = false;
+      button.removeAttribute("aria-busy");
+      button.setAttribute("aria-label", `Delete ${task.title}`);
     }
   }
 
@@ -140,6 +154,9 @@ export async function initializeDashboard(root, currentUser) {
     }
 
     submitButton.disabled = true;
+    const originalButtonText = submitButton.textContent;
+    submitButton.textContent = "Adding…";
+    taskForm.setAttribute("aria-busy", "true");
     errorMessage.hidden = true;
     try {
       const task = await apiRequest("/api/tasks", {
@@ -156,6 +173,8 @@ export async function initializeDashboard(root, currentUser) {
       showError(error, "add");
     } finally {
       submitButton.disabled = false;
+      submitButton.textContent = originalButtonText;
+      taskForm.removeAttribute("aria-busy");
     }
   });
 

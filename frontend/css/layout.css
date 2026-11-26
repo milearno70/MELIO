@@ -169,6 +169,7 @@
 
 .sidebar__logout {
   width: 100%;
+  min-height: 2.75rem;
   border: 0;
   background: transparent;
   text-align: left;
@@ -396,6 +397,13 @@
 
 .app-error {
   color: var(--color-danger);
+}
+
+.app-error__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
 }
 
 @media (max-width: 900px) {

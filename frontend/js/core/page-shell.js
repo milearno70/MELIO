@@ -1,18 +1,37 @@
 import { mountAppShell } from "../components/app-shell.js";
 import { ApiError, apiRequest, clearAuthToken, getAuthToken } from "../api.js";
 
-function showStartupError(root, pageName, error) {
+function showStartupError(root, pageName, error, retry) {
   console.error(`MELIO could not start the ${pageName} page.`, error);
+  const retryPage = retry || (() => window.location.reload());
 
   if (root) {
+    const message = error instanceof ApiError && error.status === 0
+      ? "The MELIO server could not be reached. Check your connection and try again."
+      : "Reload the page or try again.";
     root.innerHTML = `
       <main class="app-error" role="alert">
         <div>
           <h1>MELIO could not load this page</h1>
-          <p>Reload the page or return to the dashboard.</p>
-          <a class="btn btn-primary" href="index.html">Return to dashboard</a>
+          <p>${message}</p>
+          <div class="app-error__actions">
+            <button class="btn btn-primary" type="button" data-startup-retry>Try again</button>
+            <a class="btn btn-primary" href="index.html">Return to dashboard</a>
+          </div>
         </div>
       </main>`;
+    root.setAttribute("aria-busy", "false");
+    root.querySelector("[data-startup-retry]").addEventListener("click", async (event) => {
+      const retryButton = event.currentTarget;
+      retryButton.disabled = true;
+      retryButton.textContent = "Retrying…";
+      root.setAttribute("aria-busy", "true");
+      try {
+        await retryPage();
+      } catch (retryError) {
+        showStartupError(root, pageName, retryError, retryPage);
+      }
+    });
   }
 }
 
@@ -48,5 +67,5 @@ export function startAppPage({ templateId, activePage, pageName, initialize }) {
     initialize(root, currentUser);
   }
 
-  startPage().catch((error) => showStartupError(root, name, error));
+  startPage().catch((error) => showStartupError(root, name, error, startPage));
 }

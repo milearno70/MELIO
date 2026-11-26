@@ -1,7 +1,5 @@
-const apiBaseUrlMeta = document.querySelector('meta[name="api-base-url"]');
+const API_BASE_URL = "http://localhost:5030";
 
 export const APP_CONFIG = Object.freeze({
-  apiBaseUrl: apiBaseUrlMeta && apiBaseUrlMeta.content
-    ? apiBaseUrlMeta.content.replace(/\/+$/, "")
-    : "http://localhost:5030"
+  apiBaseUrl: API_BASE_URL.replace(/\/+$/, "")
 });

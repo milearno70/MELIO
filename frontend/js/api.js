@@ -3,8 +3,8 @@ import { APP_CONFIG } from "./config.js";
 const TOKEN_KEY = "melio:auth-token";
 
 export class ApiError extends Error {
-  constructor(message, status, body) {
-    super(message);
+  constructor(message, status, body, cause) {
+    super(message, { cause });
     this.name = "ApiError";
     this.status = status;
     this.body = body;
@@ -47,6 +47,8 @@ export function clearAuthToken() {
 }
 
 function errorMessage(body, status) {
+  if (status === 0) return "The MELIO server could not be reached. Check your connection and try again.";
+  if (status >= 500) return "The MELIO server is temporarily unavailable. Please try again shortly.";
   if (typeof body?.message === "string") return body.message;
   if (body?.errors && typeof body.errors === "object") {
     const validationMessages = Object.values(body.errors).flat().filter((message) => typeof message === "string");
@@ -66,10 +68,16 @@ export async function apiRequest(path, options = {}) {
   const token = getAuthToken();
   if (token) headers.set("Authorization", `Bearer ${token}`);
 
-  const response = await fetch(`${APP_CONFIG.apiBaseUrl}${path}`, {
-    ...options,
-    headers
-  });
+  let response;
+  try {
+    response = await fetch(`${APP_CONFIG.apiBaseUrl}${path}`, {
+      ...options,
+      headers
+    });
+  } catch (error) {
+    if (error?.name === "AbortError") throw error;
+    throw new ApiError(errorMessage(null, 0), 0, null, error);
+  }
 
   if (response.status === 204) return null;
 

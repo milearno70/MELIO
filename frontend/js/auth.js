@@ -110,9 +110,12 @@ if (form) {
     hasSubmitted = true;
     if (!validateForm()) return;
 
+    const isRegister = Boolean(registerForm);
+    const originalButtonText = submitButton.textContent;
     submitButton.disabled = true;
+    submitButton.textContent = isRegister ? "Creating account…" : "Signing in…";
+    form.setAttribute("aria-busy", "true");
     try {
-      const isRegister = Boolean(registerForm);
       const payload = isRegister
         ? {
             name: fields.name.value.trim(),
@@ -147,6 +150,8 @@ if (form) {
       formError.hidden = false;
     } finally {
       submitButton.disabled = false;
+      submitButton.textContent = originalButtonText;
+      form.removeAttribute("aria-busy");
     }
   });
 }
