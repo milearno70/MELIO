@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fffbed">
+  <title>Create an account | MELIO</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-page auth-page--register auth-page--signup">
+  <span class="deco deco-star deco-1" aria-hidden="true">✦</span>
+  <span class="deco deco-star deco-2" aria-hidden="true">✧</span>
+  <span class="deco deco-star deco-3" aria-hidden="true">✦</span>
+
+  <main class="auth-layout">
+    <aside class="auth-journal" aria-label="MELIO study journal">
+      <span class="auth-journal__label">Your first page</span>
+      <img class="auth-journal__logo" src="assets/images/logo1.png" alt="MELIO">
+      <h2 class="auth-journal__title">Make room<br>for big dreams.</h2>
+      <p class="auth-journal__copy">A little space to collect your ideas, goals and small wins.</p>
+      <div class="auth-journal__pet" aria-hidden="true">
+        <img src="assets/images/pet/dashboard pet2.png" alt="">
+      </div>
+      <p class="auth-journal__note">One page at a time</p>
+    </aside>
+
+    <section class="auth-container" aria-labelledby="register-title">
+      <div class="card card--taped auth-card">
+        <header class="auth-header">
+          <p class="auth-eyebrow">A new chapter begins</p>
+        </header>
+
+        <h1 class="auth-title" id="register-title">Create your account</h1>
+        <p class="text-soft auth-subtitle">Start your own little study journal.</p>
+
+        <form id="register-form" method="post">
+          <div class="form-group">
+            <label class="form-label" for="display-name">Your name</label>
+            <input class="form-input" type="text" id="display-name" name="displayName"
+              placeholder="What should we call you?" autocomplete="name" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="register-email">Email</label>
+            <input class="form-input" type="email" id="register-email" name="email"
+              placeholder="you@example.com" autocomplete="email" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="register-password">Password</label>
+            <input class="form-input" type="password" id="register-password" name="password"
+              placeholder="At least 8 characters" autocomplete="new-password" minlength="8" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="confirm-password">Confirm password</label>
+            <input class="form-input" type="password" id="confirm-password" name="confirmPassword"
+              placeholder="Type your password again" autocomplete="new-password" minlength="8" required>
+          </div>
+
+          <button class="btn btn-primary btn-block" type="submit">Create account</button>
+        </form>
+
+        <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="api-base-url" content="http://localhost:5030">
+  <meta name="theme-color" content="#fffbed">
+  <title>Settings | MELIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/pages/settings.css">
+</head>
+<body>
+  <div id="app-root" aria-busy="true">
+    <div class="app-loading" role="status">Finding your preferences…</div>
+  </div>
+
+  <template id="settings-template">
+    <div class="settings-page">
+      <header class="settings-heading">
+        <div>
+          <p class="page-heading__eyebrow">Make this space yours</p>
+          <h1>Settings</h1>
+          <p class="settings-heading__copy">A few little choices for a more comfortable study day.</p>
+        </div>
+        <span class="settings-heading__sticker" aria-hidden="true">✿</span>
+      </header>
+
+      <div class="settings-grid">
+        <section class="settings-card card settings-card--profile" aria-labelledby="profile-title">
+          <header class="settings-card__heading">
+            <span class="settings-card__sticker settings-card__sticker--pink" aria-hidden="true">M</span>
+            <div>
+              <p class="page-heading__eyebrow">Your study nook</p>
+              <h2 id="profile-title">Profile</h2>
+            </div>
+          </header>
+          <form class="settings-form" data-profile-form>
+            <label class="form-group">
+              <span class="form-label">Display name</span>
+              <input class="form-input" type="text" name="name" maxlength="40" autocomplete="name" required>
+            </label>
+            <label class="form-group">
+              <span class="form-label">Email address</span>
+              <input class="form-input" type="email" name="email" maxlength="120" autocomplete="email" placeholder="you@example.com">
+            </label>
+            <div class="settings-form__footer">
+              <p class="settings-feedback" data-profile-feedback role="status" aria-live="polite"></p>
+              <button class="btn btn-primary" type="submit">Save profile</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="settings-card card settings-card--appearance" aria-labelledby="appearance-title">
+          <header class="settings-card__heading">
+            <span class="settings-card__sticker settings-card__sticker--blue" aria-hidden="true">✧</span>
+            <div>
+              <p class="page-heading__eyebrow">A page that feels right</p>
+              <h2 id="appearance-title">Appearance</h2>
+            </div>
+          </header>
+          <form class="settings-form" data-appearance-form>
+            <fieldset class="theme-fieldset">
+              <legend class="form-label">Notebook color</legend>
+              <div class="theme-options">
+                <label class="theme-option">
+                  <input type="radio" name="theme" value="paper">
+                  <span class="theme-option__swatch theme-option__swatch--paper" aria-hidden="true"></span>
+                  <span><strong>Warm paper</strong><small>Original MELIO palette</small></span>
+                </label>
+                <label class="theme-option">
+                  <input type="radio" name="theme" value="rose">
+                  <span class="theme-option__swatch theme-option__swatch--rose" aria-hidden="true"></span>
+                  <span><strong>Rose garden</strong><small>Soft pink accents</small></span>
+                </label>
+                <label class="theme-option">
+                  <input type="radio" name="theme" value="mint">
+                  <span class="theme-option__swatch theme-option__swatch--mint" aria-hidden="true"></span>
+                  <span><strong>Mint tea</strong><small>Fresh green accents</small></span>
+                </label>
+              </div>
+            </fieldset>
+            <label class="form-group settings-text-size">
+              <span class="form-label">Interface text size</span>
+              <select class="form-select" name="textSize">
+                <option value="standard">Standard</option>
+                <option value="large">Larger text</option>
+              </select>
+            </label>
+            <label class="settings-toggle">
+              <span>
+                <strong>Reduce motion</strong>
+                <small>Keep transitions and animations very subtle.</small>
+              </span>
+              <input type="checkbox" name="reduceMotion">
+            </label>
+            <div class="settings-form__footer">
+              <p class="settings-feedback" data-appearance-feedback role="status" aria-live="polite"></p>
+              <div class="settings-form__buttons">
+                <button class="btn btn-secondary" type="button" data-reset-appearance>Reset</button>
+                <button class="btn btn-primary" type="submit">Save appearance</button>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <section class="settings-card card settings-card--notifications" aria-labelledby="notifications-title">
+          <header class="settings-card__heading">
+            <span class="settings-card__sticker settings-card__sticker--yellow" aria-hidden="true">♡</span>
+            <div>
+              <p class="page-heading__eyebrow">Only the useful nudges</p>
+              <h2 id="notifications-title">Reminders</h2>
+            </div>
+          </header>
+          <form class="settings-form" data-notifications-form>
+            <label class="settings-toggle">
+              <span>
+                <strong>Task due dates</strong>
+                <small>A gentle reminder when an assignment is coming up.</small>
+              </span>
+              <input type="checkbox" name="taskReminders">
+            </label>
+            <label class="settings-toggle">
+              <span>
+                <strong>Study nudges</strong>
+                <small>Occasional encouragement to begin a focus session.</small>
+              </span>
+              <input type="checkbox" name="studyNudges">
+            </label>
+            <label class="settings-toggle">
+              <span>
+                <strong>Pet &amp; reward updates</strong>
+                <small>Let me know when Mochi earns a new keepsake.</small>
+              </span>
+              <input type="checkbox" name="rewardUpdates">
+            </label>
+            <div class="settings-form__footer">
+              <p class="settings-feedback" data-notifications-feedback role="status" aria-live="polite"></p>
+              <button class="btn btn-primary" type="submit">Save reminders</button>
+            </div>
+          </form>
+        </section>
+
+        <aside class="settings-note card">
+          <span class="settings-note__clip" aria-hidden="true"></span>
+          <p class="paper-label">A little note</p>
+          <p>Your profile and preferences are saved in this browser for now. Reminder delivery and account sync are not connected in this frontend-only phase.</p>
+        </aside>
+      </div>
+    </div>
+  </template>
+
+  <script type="module" src="js/pages/settings.js"></script>
+</body>
+</html>

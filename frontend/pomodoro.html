@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="api-base-url" content="http://localhost:5030">
+  <meta name="theme-color" content="#fffbed">
+  <title>Pomodoro | MELIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/pages/pomodoro.css">
+</head>
+<body>
+  <div id="app-root" aria-busy="true">
+    <div class="app-loading" role="status">Opening your focus page…</div>
+  </div>
+
+  <template id="pomodoro-template">
+    <div class="pomodoro-page">
+      <header class="page-heading">
+        <div>
+          <p class="page-heading__eyebrow">My space / Focus room</p>
+          <h1>Pomodoro</h1>
+          <p class="page-heading__copy">A little time for one thing at a time.</p>
+        </div>
+        <span class="paper-label" aria-hidden="true">Breathe in · Begin</span>
+      </header>
+
+      <div class="pomodoro-layout">
+        <section class="focus-card card card--taped" aria-labelledby="timer-title">
+          <header class="focus-card__heading">
+            <div>
+              <p class="paper-label">Study session</p>
+              <h2 id="timer-title">Make a pocket of focus</h2>
+            </div>
+            <span class="focus-card__sparkle" aria-hidden="true">✦</span>
+          </header>
+
+          <div class="timer-modes" role="group" aria-label="Choose timer mode">
+            <button type="button" class="timer-mode" data-mode="focus" aria-pressed="true">Focus</button>
+            <button type="button" class="timer-mode" data-mode="shortBreak" aria-pressed="false">Short break</button>
+            <button type="button" class="timer-mode" data-mode="longBreak" aria-pressed="false">Long break</button>
+          </div>
+
+          <div class="timer-dial" data-timer-dial>
+            <div class="timer-dial__face">
+              <output class="timer-dial__time" data-timer-display aria-live="off">25:00</output>
+              <span class="timer-dial__mode" data-mode-label>Focus session</span>
+            </div>
+          </div>
+
+          <label class="timer-subject">
+            <span>Today I’m studying</span>
+            <select class="form-select" data-subject>
+              <option>Programming</option>
+              <option>Mathematics</option>
+              <option>English</option>
+              <option>Database Systems</option>
+              <option>Computer Networks</option>
+            </select>
+          </label>
+
+          <div class="timer-controls" aria-label="Timer controls">
+            <button class="btn btn-primary" type="button" data-start>
+              <span data-start-label>Start focus</span>
+            </button>
+            <button class="btn btn-secondary" type="button" data-pause disabled>Pause</button>
+            <button class="btn btn-soft" type="button" data-reset>Reset</button>
+          </div>
+
+          <p class="timer-status" data-timer-status role="status" aria-live="polite">Ready when you are.</p>
+          <div class="cycle-progress" aria-live="polite">
+            <span class="cycle-progress__stars" aria-hidden="true">✦ ✧ ✦ ✧</span>
+            <strong data-cycle-count>0 / 4</strong>
+            <span>focus sessions until a long break</span>
+          </div>
+        </section>
+
+        <aside class="pomodoro-aside">
+          <section class="timer-settings card" aria-labelledby="timer-settings-title">
+            <header class="section-heading">
+              <div>
+                <p class="page-heading__eyebrow">Your rhythm</p>
+                <h2 id="timer-settings-title">Timer settings</h2>
+              </div>
+              <span class="section-heading__tape" aria-hidden="true"></span>
+            </header>
+            <form class="timer-settings__form" data-settings-form>
+              <label class="form-group">
+                <span class="form-label">Focus (minutes)</span>
+                <input class="form-input" type="number" name="focus" min="1" max="180" required value="25">
+              </label>
+              <label class="form-group">
+                <span class="form-label">Short break</span>
+                <input class="form-input" type="number" name="shortBreak" min="1" max="60" required value="5">
+              </label>
+              <label class="form-group">
+                <span class="form-label">Long break</span>
+                <input class="form-input" type="number" name="longBreak" min="1" max="90" required value="15">
+              </label>
+              <label class="form-group">
+                <span class="form-label">Long break every</span>
+                <input class="form-input" type="number" name="longBreakEvery" min="2" max="10" required value="4">
+              </label>
+              <button class="btn btn-secondary btn-small" type="submit">Save rhythm</button>
+              <p class="settings-feedback" data-settings-feedback role="status" aria-live="polite"></p>
+            </form>
+          </section>
+
+          <section class="recent-sessions card" aria-labelledby="recent-sessions-title">
+            <header class="section-heading">
+              <div>
+                <p class="page-heading__eyebrow">Little by little</p>
+                <h2 id="recent-sessions-title">Recent sessions</h2>
+              </div>
+              <span class="recent-sessions__flower" aria-hidden="true">✿</span>
+            </header>
+            <ul class="session-list" data-session-list></ul>
+            <p class="empty-sessions" data-empty-sessions hidden>No finished focus sessions yet. Your first one will land here.</p>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </template>
+
+  <script type="module" src="js/pages/pomodoro.js"></script>
+</body>
+</html>

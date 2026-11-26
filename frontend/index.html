@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="api-base-url" content="http://localhost:5030">
+  <title>Dashboard | MELIO</title>
+  <meta name="theme-color" content="#fffbed">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/pages/dashboard.css">
+</head>
+<body>
+  <noscript>
+    <p class="app-error">MELIO needs JavaScript enabled to load the application shell.</p>
+  </noscript>
+
+  <div id="app-root" aria-busy="true">
+    <div class="app-loading" role="status">Loading MELIO…</div>
+  </div>
+
+  <template id="dashboard-template">
+    <div class="dashboard-page">
+      <section class="dashboard-welcome" aria-labelledby="dashboard-title">
+        <div class="dashboard-welcome__copy">
+          <p class="dashboard-welcome__kicker" aria-hidden="true">Mely’s study journal <span>· Vol. 01</span></p>
+          <h1 id="dashboard-title">Haii, Mely!</h1>
+          <p class="dashboard-welcome__subtitle">Ready to make today a little more productive?</p>
+        </div>
+        <aside class="quote-note" aria-label="Daily encouragement">
+          “Small steps still move you forward.” <span class="quote-note__heart" aria-hidden="true">♡</span>
+        </aside>
+      </section>
+
+      <div class="dashboard-grid">
+        <section class="dashboard-card dashboard-card--buddy" aria-labelledby="buddy-title">
+          <header class="dashboard-card__heading">
+            <h2 id="buddy-title">Your study buddy</h2>
+            <a class="dashboard-card__link" href="pet.html">Visit pet <span aria-hidden="true">→</span></a>
+          </header>
+          <div class="buddy-content">
+            <div class="buddy-avatar">
+              <img src="assets/images/pet/pet1.png" alt="Your pixel-art study buddy">
+            </div>
+            <div class="buddy-details">
+              <h3>Mochi</h3>
+              <p class="buddy-level">Level 1 · Happy &amp; content</p>
+
+              <div class="buddy-stat">
+                <span>Happiness</span>
+                <span class="buddy-stat__value">100/100</span>
+                <div class="progress-track" role="progressbar" aria-label="Mochi happiness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+                  <span style="--progress: 100%; --progress-color: #f29db9"></span>
+                </div>
+              </div>
+              <div class="buddy-stat">
+                <span>Energy</span>
+                <span class="buddy-stat__value">86/100</span>
+                <div class="progress-track" role="progressbar" aria-label="Mochi energy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="86">
+                  <span style="--progress: 86%; --progress-color: #8fd2ac"></span>
+                </div>
+              </div>
+              <div class="buddy-stat">
+                <span>XP to level 2</span>
+                <span class="buddy-stat__value">20/100</span>
+                <div class="progress-track" role="progressbar" aria-label="Experience to level 2" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20">
+                  <span style="--progress: 20%; --progress-color: #f2c64f"></span>
+                </div>
+              </div>
+
+              <div class="buddy-actions" aria-label="Study buddy actions">
+                <span class="btn btn-small">Feed</span>
+                <span class="btn btn-small">Play</span>
+                <span class="btn btn-small">Nap</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="dashboard-card dashboard-card--today" aria-labelledby="today-title">
+          <header class="dashboard-card__heading">
+            <h2 id="today-title">Today’s page</h2>
+            <span class="paper-label dashboard-card__stamp" aria-hidden="true">Today</span>
+          </header>
+          <div class="goal-ring" role="img" aria-label="Daily goal progress: 0 percent">
+            <div class="goal-ring__copy">
+              <strong>0%</strong>
+              <span>of goal</span>
+            </div>
+          </div>
+          <div class="metric-grid">
+            <div class="metric-tile"><span>Studied</span><strong>0h 0m</strong></div>
+            <div class="metric-tile"><span>Sessions</span><strong>0</strong></div>
+            <div class="metric-tile"><span>Daily goal</span><strong>2h</strong></div>
+            <div class="metric-tile"><span>Tasks done</span><strong>0/3</strong></div>
+          </div>
+        </section>
+
+        <section class="dashboard-card dashboard-card--pomodoro" aria-labelledby="pomodoro-title">
+          <header class="dashboard-card__heading">
+            <h2 id="pomodoro-title">Pomodoro</h2>
+            <a class="dashboard-card__link" href="pomodoro.html">Full timer <span aria-hidden="true">→</span></a>
+          </header>
+          <div class="timer-tabs" aria-label="Timer mode">
+            <span>Focus</span>
+            <span aria-current="true">Short break</span>
+            <span>Long break</span>
+          </div>
+          <div class="timer-dial" role="img" aria-label="Five minute short break">
+            <strong>05:00</strong>
+            <span>Short break</span>
+          </div>
+          <div class="timer-subject"><span class="status-dot"></span>Programming <span aria-hidden="true">⌄</span></div>
+          <div class="timer-controls">
+            <a class="btn btn-primary btn-small" href="pomodoro.html">Start</a>
+            <a class="btn btn-secondary btn-small" href="pomodoro.html">Reset</a>
+          </div>
+          <p class="timer-footnote">1/4 focus sessions until a long break</p>
+        </section>
+
+        <section class="dashboard-card dashboard-card--tasks" aria-labelledby="tasks-title">
+          <header class="dashboard-card__heading">
+            <h2 id="tasks-title">Today’s tasks</h2>
+            <a class="dashboard-card__link" href="tasks.html">+5 pts each</a>
+          </header>
+          <ul class="task-list">
+            <li class="task-row">
+              <span class="task-row__check" aria-hidden="true"></span>
+              <span class="task-row__title">Finish UI wireframe for MELIO</span>
+              <span class="tag">Design</span>
+              <span class="task-row__points">+5</span>
+            </li>
+            <li class="task-row">
+              <span class="task-row__check" aria-hidden="true"></span>
+              <span class="task-row__title">Practice IELTS reading passage</span>
+              <span class="tag" style="background: var(--color-pink-soft)">English</span>
+              <span class="task-row__points">+5</span>
+            </li>
+            <li class="task-row">
+              <span class="task-row__check" aria-hidden="true"></span>
+              <span class="task-row__title">Review JavaScript array methods</span>
+              <span class="tag" style="background: var(--color-mint)">Programming</span>
+              <span class="task-row__points">+5</span>
+            </li>
+          </ul>
+          <p class="dashboard-footnote">Nothing else due today — enjoy the breathing room.</p>
+        </section>
+
+        <nav class="dashboard-shortcuts" aria-label="Study tools">
+          <a class="dashboard-shortcut dashboard-shortcut--library" href="library.html">
+            <span data-dashboard-icon="library" aria-hidden="true"></span>
+            <h2>My Library</h2>
+            <span>Open bookshelf <span aria-hidden="true">→</span></span>
+          </a>
+          <a class="dashboard-shortcut dashboard-shortcut--notes" href="notes.html">
+            <span data-dashboard-icon="notes" aria-hidden="true"></span>
+            <h2>Notes</h2>
+            <span>Open notebook <span aria-hidden="true">→</span></span>
+          </a>
+          <a class="dashboard-shortcut dashboard-shortcut--tracking" href="tracking.html">
+            <span data-dashboard-icon="tracking" aria-hidden="true"></span>
+            <h2>Study Tracking</h2>
+            <span>View progress <span aria-hidden="true">→</span></span>
+          </a>
+          <a class="dashboard-shortcut dashboard-shortcut--pet" href="pet.html">
+            <span data-dashboard-icon="pet" aria-hidden="true"></span>
+            <h2>Pet &amp; Rewards</h2>
+            <span>Visit your buddy <span aria-hidden="true">→</span></span>
+          </a>
+        </nav>
+
+        <section class="dashboard-card dashboard-card--wins" aria-labelledby="wins-title">
+          <header class="dashboard-card__heading">
+            <h2 id="wins-title">Little wins</h2>
+          </header>
+          <p class="wins-points">5 <span class="text-soft" style="font: 600 0.9rem var(--font-body)">points</span></p>
+          <ul class="win-list">
+            <li>Start your first session today</li>
+            <li>120 min to your daily goal</li>
+          </ul>
+        </section>
+
+        <section class="dashboard-card dashboard-card--week" aria-labelledby="week-title">
+          <header class="dashboard-card__heading">
+            <h2 id="week-title">This week</h2>
+            <a class="dashboard-card__link" href="tracking.html">Study tracking <span aria-hidden="true">→</span></a>
+          </header>
+          <div class="week-chart" role="img" aria-label="Study time by day, Monday through Sunday">
+            <div class="week-chart__day"><span class="week-chart__bar" style="--bar-height: 3.8rem; --bar-color: #89c9e2"></span><span>Mon</span></div>
+            <div class="week-chart__day"><span class="week-chart__bar" style="--bar-color: var(--color-primary)"></span><span>Tue</span></div>
+            <div class="week-chart__day"><span class="week-chart__bar" style="--bar-color: #91d3ae"></span><span>Wed</span></div>
+            <div class="week-chart__day"><span class="week-chart__bar" style="--bar-color: #f29db9"></span><span>Thu</span></div>
+            <div class="week-chart__day"><span class="week-chart__bar" style="--bar-color: #b8a4e8"></span><span>Fri</span></div>
+            <div class="week-chart__day"><span class="week-chart__bar" style="--bar-color: #f1c74a"></span><span>Sat</span></div>
+            <div class="week-chart__day"><span class="week-chart__bar" style="--bar-color: #89c9e2"></span><span>Sun</span></div>
+          </div>
+          <p class="dashboard-footnote">Sample data — your real study minutes will appear here.</p>
+        </section>
+
+        <section class="dashboard-card dashboard-card--subjects" aria-labelledby="subjects-title">
+          <header class="dashboard-card__heading">
+            <h2 id="subjects-title">Subjects</h2>
+          </header>
+          <ul class="subject-list">
+            <li class="subject-item"><span>Programming</span><span>60%</span><div class="progress-track"><span style="--progress: 60%; --progress-color: #91d3ae"></span></div></li>
+            <li class="subject-item"><span>Web Design</span><span>40%</span><div class="progress-track"><span style="--progress: 40%; --progress-color: #f29db9"></span></div></li>
+            <li class="subject-item"><span>English (IELTS)</span><span>25%</span><div class="progress-track"><span style="--progress: 25%; --progress-color: #89c9e2"></span></div></li>
+            <li class="subject-item"><span>UI/UX Basics</span><span>15%</span><div class="progress-track"><span style="--progress: 15%; --progress-color: #b8a4e8"></span></div></li>
+          </ul>
+        </section>
+
+        <section class="dashboard-card dashboard-card--upcoming" aria-labelledby="upcoming-title">
+          <header class="dashboard-card__heading">
+            <h2 id="upcoming-title">Coming up</h2>
+            <a class="dashboard-card__link" href="tasks.html">See all <span aria-hidden="true">→</span></a>
+          </header>
+          <ul class="upcoming-list">
+            <li class="upcoming-row"><span class="tag" style="background: var(--color-pink-soft)">Nov 12</span><span class="upcoming-row__title">Portfolio: dashboard case study</span><span class="upcoming-row__category">Design</span></li>
+            <li class="upcoming-row"><span class="tag" style="background: var(--color-mint)">Nov 14</span><span class="upcoming-row__title">Web programming lab</span><span class="upcoming-row__category">Programming</span></li>
+            <li class="upcoming-row"><span class="tag" style="background: var(--color-blue)">Nov 18</span><span class="upcoming-row__title">IELTS mock reading test</span><span class="upcoming-row__category">English</span></li>
+          </ul>
+        </section>
+
+        <section class="dashboard-card dashboard-card--streak" aria-labelledby="streak-title">
+          <header class="dashboard-card__heading">
+            <h2 id="streak-title">Study streak</h2>
+          </header>
+          <p class="streak-summary">
+            <span data-dashboard-icon="flame" aria-hidden="true"></span>
+            <strong>1</strong>
+            <span>day — keep it going!</span>
+          </p>
+          <ul class="streak-days" aria-label="Weekly streak">
+            <li class="is-active">M</li><li class="is-active">T</li><li>W</li><li>T</li><li>F</li><li>S</li><li>S</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </template>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

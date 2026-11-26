@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="api-base-url" content="http://localhost:5030">
+  <meta name="theme-color" content="#fffbed">
+  <title>My Library | MELIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/pages/library.css">
+</head>
+<body>
+  <div id="app-root" aria-busy="true">
+    <div class="app-loading" role="status">Opening your bookshelf…</div>
+  </div>
+
+  <template id="library-template">
+    <div class="library-page">
+      <header class="library-heading">
+        <div>
+          <p class="page-heading__eyebrow">My space / Bookshelf</p>
+          <h1>My Library</h1>
+          <p class="library-heading__summary">
+            <strong data-book-total>0</strong> books
+            <span aria-hidden="true">·</span>
+            <strong data-book-reading>0</strong> reading
+            <span aria-hidden="true">·</span>
+            <strong data-book-finished>0</strong> finished
+          </p>
+        </div>
+        <button class="btn btn-primary" type="button" data-add-book>
+          <span aria-hidden="true">＋</span> Add book
+        </button>
+      </header>
+
+      <div class="library-toolbar" role="search" aria-label="Search and filter books">
+        <label class="library-search">
+          <span class="visually-hidden">Search title, author, or category</span>
+          <span aria-hidden="true">⌕</span>
+          <input class="form-input" type="search" placeholder="Search title or author…" data-book-search>
+        </label>
+        <label>
+          <span class="visually-hidden">Filter by category</span>
+          <select class="form-select" data-category-filter>
+            <option value="all">All categories</option>
+            <option>Programming</option>
+            <option>Textbook</option>
+            <option>Fiction</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>
+          <span class="visually-hidden">Filter by reading status</span>
+          <select class="form-select" data-status-filter>
+            <option value="all">All statuses</option>
+            <option value="Want to read">Want to read</option>
+            <option value="Reading">Reading</option>
+            <option value="Finished">Finished</option>
+          </select>
+        </label>
+        <button class="btn btn-soft btn-small" type="button" data-clear-filters>Clear</button>
+      </div>
+
+      <section class="book-shelf" aria-label="Bookshelf">
+        <div class="book-grid" data-book-grid></div>
+        <div class="library-empty" data-library-empty hidden>
+          <span class="library-empty__icon" aria-hidden="true">⌕</span>
+          <h2>No books on this shelf</h2>
+          <p>Try another search, or add a new book to your collection.</p>
+        </div>
+      </section>
+
+      <dialog class="book-dialog card" data-editor-dialog aria-labelledby="book-dialog-title">
+        <form class="book-form" data-book-form>
+          <header class="dialog-heading">
+            <div>
+              <p class="page-heading__eyebrow">A new shelf-mate</p>
+              <h2 id="book-dialog-title" data-editor-title>Add a book</h2>
+            </div>
+            <button class="icon-button" type="button" data-close-editor aria-label="Close book editor">×</button>
+          </header>
+          <label class="form-group">
+            <span class="form-label">Book title</span>
+            <input class="form-input" name="title" maxlength="100" required placeholder="What are you reading?">
+          </label>
+          <label class="form-group">
+            <span class="form-label">Author</span>
+            <input class="form-input" name="author" maxlength="80" required placeholder="Author name">
+          </label>
+          <div class="book-form__row">
+            <label class="form-group">
+              <span class="form-label">Category</span>
+              <select class="form-select" name="category">
+                <option>Programming</option>
+                <option>Textbook</option>
+                <option>Fiction</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label class="form-group">
+              <span class="form-label">Reading status</span>
+              <select class="form-select" name="status">
+                <option>Want to read</option>
+                <option>Reading</option>
+                <option>Finished</option>
+              </select>
+            </label>
+          </div>
+          <label class="form-group">
+            <span class="form-label">Progress <output data-progress-output>0%</output></span>
+            <input class="book-progress-input" type="range" name="progress" min="0" max="100" step="5" value="0">
+          </label>
+          <label class="form-group">
+            <span class="form-label">A note about this book</span>
+            <textarea class="form-input book-form__summary" name="summary" maxlength="500"
+              placeholder="A thought, a quote, or what you hope to learn…"></textarea>
+          </label>
+          <div class="book-form__actions">
+            <button class="btn btn-secondary" type="button" data-close-editor>Cancel</button>
+            <button class="btn btn-primary" type="submit">Save book</button>
+          </div>
+        </form>
+      </dialog>
+
+      <dialog class="book-dialog book-detail-dialog card" data-details-dialog aria-labelledby="book-details-title">
+        <header class="dialog-heading">
+          <div>
+            <p class="page-heading__eyebrow" data-details-category></p>
+            <h2 id="book-details-title" data-details-title></h2>
+            <p class="book-detail-dialog__author" data-details-author></p>
+          </div>
+          <button class="icon-button" type="button" data-close-details aria-label="Close book details">×</button>
+        </header>
+        <div class="book-detail-dialog__progress">
+          <span data-details-status></span>
+          <strong data-details-progress></strong>
+          <div class="progress-track" role="progressbar" data-details-progressbar>
+            <span></span>
+          </div>
+        </div>
+        <p class="book-detail-dialog__summary" data-details-summary></p>
+        <div class="book-form__actions">
+          <button class="btn btn-secondary" type="button" data-details-edit>Edit details</button>
+          <button class="btn btn-soft" type="button" data-close-details>Close</button>
+        </div>
+      </dialog>
+    </div>
+  </template>
+
+  <script type="module" src="js/pages/library.js"></script>
+</body>
+</html>

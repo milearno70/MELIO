@@ -1,0 +1,30 @@
+.preview-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: clamp(1rem, 5vw, 3rem);
+}
+
+.preview-card {
+  width: min(100%, 28rem);
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  border-radius: 1.5rem 1.9rem 1.45rem 1.85rem;
+}
+
+.preview-card .logo {
+  color: var(--color-primary);
+}
+
+.preview-label {
+  width: fit-content;
+  margin: 1.5rem auto;
+  padding: 0.3rem 0.75rem;
+  border: 1px dashed rgba(43, 129, 144, 0.32);
+  border-radius: 0.3rem 0.7rem 0.3rem 0.7rem;
+  background: var(--color-blue-soft);
+  color: var(--color-primary-hover);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="api-base-url" content="http://localhost:5030">
+  <meta name="theme-color" content="#fffbed">
+  <title>Pet &amp; Rewards | MELIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/pages/pet.css">
+</head>
+<body>
+  <div id="app-root" aria-busy="true">
+    <div class="app-loading" role="status">Visiting Mochi’s corner…</div>
+  </div>
+
+  <template id="pet-template">
+    <div class="pet-page">
+      <header class="pet-heading">
+        <div>
+          <p class="page-heading__eyebrow">A little friend for your study days</p>
+          <h1>Pet &amp; Rewards</h1>
+          <p class="pet-heading__copy">Care for Mochi, grow together, and collect tiny rewards.</p>
+        </div>
+        <span class="paper-label" data-reward-count>0 collected</span>
+      </header>
+
+      <div class="pet-main-grid">
+        <section class="mochi-card card card--taped" aria-labelledby="mochi-name">
+          <div class="mochi-card__heading">
+            <div>
+              <p class="paper-label">Mochi’s little world</p>
+              <h2 id="mochi-name">Mochi</h2>
+            </div>
+            <span class="mochi-card__sparkle" aria-hidden="true">✦</span>
+          </div>
+          <div class="mochi-stage">
+            <span class="mochi-stage__sticker" aria-hidden="true">♡</span>
+            <div class="pet-avatar" data-pet-avatar role="img" aria-label="Mochi"></div>
+            <span class="mochi-stage__doodle" aria-hidden="true">✿</span>
+          </div>
+          <p class="mochi-message" data-pet-message role="status" aria-live="polite"></p>
+          <p class="pet-save-status" data-pet-save-status role="status" aria-live="polite"></p>
+          <div class="pet-vitals">
+            <div class="pet-vital">
+              <div class="pet-vital__label">
+                <span>Happiness</span>
+                <strong data-happiness-value></strong>
+              </div>
+              <div class="pet-vital__track" data-happiness-bar role="progressbar" aria-label="Mochi’s happiness" aria-valuemin="0" aria-valuemax="100">
+                <span></span>
+              </div>
+            </div>
+            <div class="pet-vital pet-vital--energy">
+              <div class="pet-vital__label">
+                <span>Energy</span>
+                <strong data-energy-value></strong>
+              </div>
+              <div class="pet-vital__track" data-energy-bar role="progressbar" aria-label="Mochi’s energy" aria-valuemin="0" aria-valuemax="100">
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="pet-care card" aria-labelledby="care-title">
+          <header class="pet-section-heading">
+            <div>
+              <p class="page-heading__eyebrow">A little care goes a long way</p>
+              <h2 id="care-title">Mochi’s day</h2>
+            </div>
+            <span class="pet-care__sticker" aria-hidden="true">☁</span>
+          </header>
+          <div class="pet-level">
+            <span class="pet-level__badge" aria-hidden="true">Lv</span>
+            <div class="pet-level__copy">
+              <strong>Level <span data-level></span></strong>
+              <span><span data-xp-value></span> / 100 friendship XP</span>
+              <div class="pet-level__track" data-xp-bar role="progressbar" aria-label="Friendship experience" aria-valuemin="0" aria-valuemax="100">
+                <span></span>
+              </div>
+            </div>
+          </div>
+          <div class="pet-treat-count">
+            <span aria-hidden="true">♡</span>
+            <span><strong data-treat-count></strong> cozy treats</span>
+          </div>
+          <div class="pet-actions" aria-label="Care actions">
+            <button class="pet-action pet-action--feed" type="button" data-care-action="feed">
+              <span class="pet-action__icon" aria-hidden="true">♡</span>
+              <span><strong>Feed</strong><small>Share a treat</small></span>
+            </button>
+            <button class="pet-action pet-action--play" type="button" data-care-action="play">
+              <span class="pet-action__icon" aria-hidden="true">✦</span>
+              <span><strong>Play</strong><small>A little game</small></span>
+            </button>
+            <button class="pet-action pet-action--rest" type="button" data-care-action="rest">
+              <span class="pet-action__icon" aria-hidden="true">☾</span>
+              <span><strong>Rest</strong><small>Take a breather</small></span>
+            </button>
+          </div>
+        </aside>
+      </div>
+
+      <details class="pet-customize card">
+        <summary>
+          <span>
+            <span class="page-heading__eyebrow">Make Mochi feel like Mochi</span>
+            <strong>Style your study buddy</strong>
+          </span>
+          <span class="pet-customize__hint">Choose a look</span>
+        </summary>
+        <div class="pet-customize__groups">
+          <fieldset class="pet-choice-group">
+            <legend>Skin tone</legend>
+            <div class="pet-choice-row" data-skin-options></div>
+          </fieldset>
+          <fieldset class="pet-choice-group">
+            <legend>Outfit</legend>
+            <div class="pet-choice-row" data-outfit-options></div>
+          </fieldset>
+          <fieldset class="pet-choice-group">
+            <legend>Expression</legend>
+            <div class="pet-choice-row" data-face-options></div>
+          </fieldset>
+          <fieldset class="pet-choice-group">
+            <legend>Hair style</legend>
+            <div class="pet-choice-row" data-hair-style-options></div>
+          </fieldset>
+          <fieldset class="pet-choice-group" data-hair-color-group hidden>
+            <legend>Hair color</legend>
+            <div class="pet-choice-row" data-hair-color-options></div>
+          </fieldset>
+        </div>
+      </details>
+
+      <section class="rewards-section" aria-labelledby="rewards-title">
+        <header class="pet-section-heading rewards-heading">
+          <div>
+            <p class="page-heading__eyebrow">Little milestones become keepsakes</p>
+            <h2 id="rewards-title">Mochi’s sticker book</h2>
+          </div>
+          <span class="rewards-heading__doodle" aria-hidden="true">✿ ✦</span>
+        </header>
+        <div class="reward-grid" data-reward-grid></div>
+      </section>
+    </div>
+  </template>
+
+  <script type="module" src="js/pages/pet.js"></script>
+</body>
+</html>

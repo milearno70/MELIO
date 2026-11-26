@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="api-base-url" content="http://localhost:5030">
+  <meta name="theme-color" content="#fffbed">
+  <title>Notes | MELIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/pages/notes.css">
+</head>
+<body>
+  <div id="app-root" aria-busy="true">
+    <div class="app-loading" role="status">Opening your notebook…</div>
+  </div>
+
+  <template id="notes-template">
+    <div class="notes-page">
+      <header class="notes-heading">
+        <div>
+          <p class="page-heading__eyebrow">My space / Notebook</p>
+          <h1>Notes</h1>
+          <p class="notes-heading__count" data-notes-count></p>
+        </div>
+        <button class="btn btn-primary" type="button" data-new-note>
+          <span aria-hidden="true">＋</span> New note
+        </button>
+      </header>
+
+      <div class="notes-layout">
+        <aside class="notes-rail" aria-label="Notebook index">
+          <label class="notes-search">
+            <span class="visually-hidden">Search notes by title, content, subject, or tag</span>
+            <span aria-hidden="true">⌕</span>
+            <input class="form-input" type="search" placeholder="Search notes or tags…" data-notes-search>
+          </label>
+          <label class="notes-subject-filter">
+            <span class="visually-hidden">Filter notes by subject</span>
+            <select class="form-select" data-notes-subject-filter>
+              <option value="all">All subjects</option>
+              <option>Database Systems</option>
+              <option>Calculus</option>
+              <option>English</option>
+              <option>Computer Science</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <div class="notes-list" data-note-list aria-label="Saved notes"></div>
+          <p class="notes-list-empty" data-notes-list-empty hidden>No notes match this search.</p>
+        </aside>
+
+        <section class="note-editor" data-note-editor aria-label="Note editor" hidden>
+          <header class="note-editor__toolbar">
+            <span class="note-save-status" data-save-status role="status" aria-live="polite"></span>
+            <div class="note-editor__actions">
+              <button class="note-action note-action--pin" type="button" data-toggle-pin aria-pressed="false">
+                <span aria-hidden="true">☆</span>
+                <span data-pin-label>Pin note</span>
+              </button>
+              <button class="icon-button note-action--delete" type="button" data-delete-note aria-label="Delete note" title="Delete note">×</button>
+            </div>
+          </header>
+
+          <div class="note-paper">
+            <label class="visually-hidden" for="note-title">Note title</label>
+            <input class="note-title" id="note-title" type="text" maxlength="100" placeholder="Give this page a title…" data-note-title>
+            <label class="note-subject">
+              <span>Subject</span>
+              <select class="form-select" data-note-subject>
+                <option>Database Systems</option>
+                <option>Calculus</option>
+                <option>English</option>
+                <option>Computer Science</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label class="visually-hidden" for="note-content">Note content</label>
+            <textarea class="note-content" id="note-content" maxlength="10000"
+              placeholder="Let your thoughts find a line…" data-note-content></textarea>
+          </div>
+
+          <footer class="note-tags">
+            <div class="note-tags__list" data-note-tags aria-label="Note tags"></div>
+            <form class="note-tags__add" data-add-tag-form>
+              <label class="visually-hidden" for="new-note-tag">Add a tag</label>
+              <input class="form-input" id="new-note-tag" type="text" maxlength="24" placeholder="Add a tag…" data-new-tag>
+              <button class="btn btn-secondary" type="submit" aria-label="Add tag">+</button>
+            </form>
+          </footer>
+        </section>
+
+        <section class="note-empty-state" data-note-empty aria-label="No note selected" hidden>
+          <span class="note-empty-state__doodle" aria-hidden="true">✿</span>
+          <h2>This page is waiting for an idea</h2>
+          <p>Pick a page from your notebook or start a fresh note.</p>
+          <button class="btn btn-primary" type="button" data-empty-new-note>Write a note</button>
+        </section>
+      </div>
+    </div>
+  </template>
+
+  <script type="module" src="js/pages/notes.js"></script>
+</body>
+</html>

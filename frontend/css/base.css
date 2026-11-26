@@ -1,0 +1,139 @@
+body {
+  color: var(--color-ink);
+  background-color: var(--color-cream);
+  background-image:
+    radial-gradient(rgba(105, 92, 75, 0.035) 0.65px, transparent 0.75px),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 15px,
+      rgba(236, 202, 211, 0.22) 15px 22px,
+      transparent 22px 60px,
+      rgba(224, 235, 213, 0.2) 60px 68px,
+      transparent 68px 120px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 15px,
+      rgba(224, 235, 213, 0.2) 15px 22px,
+      transparent 22px 60px,
+      rgba(219, 238, 245, 0.24) 60px 68px,
+      transparent 68px 120px
+    );
+  background-size: 7px 7px, auto, auto;
+  background-attachment: fixed;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.logo {
+  margin: 0;
+  color: #d45c8a;
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.slogan {
+  margin: 0;
+  color: var(--color-ink-muted);
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+button {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.text-soft {
+  color: var(--color-ink-muted);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: var(--space-3);
+  left: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  transform: translateY(-160%);
+  border-radius: var(--radius-sm);
+  color: #fff;
+  background: var(--color-primary);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes buddy-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-0.35rem);
+  }
+}

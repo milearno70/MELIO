@@ -1,76 +1,86 @@
 <!DOCTYPE html>
-<html lang="az">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | MELIO</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fffbed">
+  <title>Login | MELIO</title>
 
-    <!-- Google Fonts: Fredoka (başlıqlar) və Nunito (mətn) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;700&display=swap"
-        rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
 
-    <!-- Əvvəl ortaq dizayn sistemi, sonra bu səhifəyə aid stillər -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/auth.css">
 </head>
+<body class="auth-page auth-page--login">
+  <span class="deco deco-star deco-1" aria-hidden="true">✦</span>
+  <span class="deco deco-star deco-2" aria-hidden="true">✧</span>
+  <span class="deco deco-star deco-3" aria-hidden="true">✦</span>
 
-<body class="auth-page">
+  <main class="auth-layout">
+    <aside class="auth-journal" aria-label="MELIO study journal">
+      <span class="auth-journal__label">A fresh page awaits</span>
+      <img class="auth-journal__logo" src="assets/images/logo1.png" alt="MELIO">
+      <h2 class="auth-journal__title">Little steps.<br>Big dreams.</h2>
+      <p class="auth-journal__copy">A cozy little corner for your next bright idea.</p>
+      <div class="auth-journal__pet" aria-hidden="true">
+        <img src="assets/images/pet/dashboard pet.png" alt="">
+      </div>
+      <p class="auth-journal__note">Today is a good day to begin</p>
+    </aside>
 
-    <!-- Dekorativ elementlər (ekran oxuyucular üçün gizlidir) -->
-    <span class="deco deco-star deco-1" aria-hidden="true">✦</span>
-    <span class="deco deco-star deco-2" aria-hidden="true">✧</span>
-    <span class="deco deco-star deco-3" aria-hidden="true">✦</span>
+    <section class="auth-container" aria-labelledby="login-title">
+      <div class="card card--taped auth-card">
+        <header class="auth-header">
+          <p class="auth-eyebrow">Your study journal · 01</p>
+        </header>
 
-    <main class="auth-container">
-        <div class="card card--taped">
+        <h1 class="auth-title" id="login-title">Welcome back</h1>
+        <p class="text-soft auth-subtitle">Log in to continue your study journey.</p>
 
-            <header class="auth-header">
-                <h1 class="logo">MELIO</h1>
-                <p class="slogan">Little Steps, Big Dreams.</p>
-            </header>
+        <div id="form-error" class="alert alert-error" role="alert" hidden></div>
+        <div id="form-success" class="alert alert-success" role="status" hidden></div>
 
-            <h2 class="auth-title">Welcome back</h2>
-            <p class="text-soft auth-subtitle">Log in to continue your study journey.</p>
+        <form id="login-form" method="post">
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="you@example.com"
+              autocomplete="email" required>
+            <p class="field-error" id="email-error"></p>
+          </div>
 
-            <!-- Mesaj blokları: JavaScript sonra göstərəcək -->
-            <div id="form-error" class="alert alert-error" role="alert" hidden></div>
-            <div id="form-success" class="alert alert-success" role="status" hidden></div>
+          <div class="form-group form-group--password">
+            <label class="form-label" for="password">Password</label>
+            <div class="input-wrap">
+              <input class="form-input" type="password" id="password" name="password"
+                placeholder="Enter your password" autocomplete="current-password" required>
+              <button class="toggle-password" type="button" id="toggle-password" aria-label="Show password">👁</button>
+            </div>
+            <p class="field-error" id="password-error"></p>
+          </div>
 
-            <form id="login-form" novalidate>
+          <div class="auth-login-options">
+            <label class="auth-remember" for="remember-me">
+              <input type="checkbox" id="remember-me" name="rememberMe">
+              <span>Remember me</span>
+            </label>
+            <a class="auth-forgot" href="reset-password.html">Forgot password?</a>
+          </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="email">Email</label>
-                    <input class="form-input" type="email" id="email" name="email" placeholder="you@example.com"
-                        autocomplete="email">
-                    <p class="field-error" id="email-error"></p>
-                </div>
+          <button class="btn btn-primary btn-block" type="submit">Login</button>
+        </form>
 
-                <div class="form-group">
-                    <label class="form-label" for="password">Password</label>
-                    <div class="input-wrap">
-                        <input class="form-input" type="password" id="password" name="password"
-                            placeholder="Enter your password" autocomplete="current-password">
-                        <button class="toggle-password" type="button" id="toggle-password"
-                            aria-label="Show password">👁</button>
-                    </div>
-                    <p class="field-error" id="password-error"></p>
-                </div>
+        <p class="auth-switch">New to MELIO? <a href="register.html">Create an account</a></p>
+      </div>
+    </section>
+  </main>
 
-                <button class="btn btn-primary btn-block" type="submit">Login</button>
-            </form>
-
-            <p class="auth-switch text-center">
-                New to MELIO? <a href="register.html">Create an account</a>
-            </p>
-
-        </div>
-    </main>
-
-    <script src="js/auth.js"></script>
+  <script src="js/auth.js"></script>
 </body>
-
 </html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fffbed">
+  <title>Study Buddy Studio | MELIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/pet-test.css">
+</head>
+<body class="pet-test-page">
+  <main class="pet-editor">
+    <header class="pet-editor__header">
+      <div>
+        <p class="paper-label">Mochi's little world</p>
+        <h1>Study Buddy Studio</h1>
+      </div>
+      <p>Mix and match a look for your study companion.</p>
+    </header>
+
+    <section class="pet-stage" aria-label="Study buddy preview">
+      <div class="pet" role="img" aria-label="Layered pixel-art study buddy">
+      </div>
+      <p class="pet-caption">A little friend for every study session.</p>
+    </section>
+
+    <section class="controls" aria-label="Study buddy appearance">
+      <div class="group">
+        <h2>Skin tone</h2>
+        <div class="row" id="skin-row"></div>
+      </div>
+      <div class="group">
+        <h2>Outfit</h2>
+        <div class="row" id="clothes-row"></div>
+      </div>
+      <div class="group">
+        <h2>Expression</h2>
+        <div class="row" id="face-row"></div>
+      </div>
+      <div class="group">
+        <h2>Hair style</h2>
+        <div class="row" id="hair-style-row"></div>
+      </div>
+      <div class="group" id="color-group" hidden>
+        <h2>Hair color</h2>
+        <div class="row" id="hair-color-row"></div>
+      </div>
+      <p id="info" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script type="module" src="js/pages/pet-test.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="api-base-url" content="http://localhost:5030">
+  <meta name="theme-color" content="#fffbed">
+  <title>Tasks | MELIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/pages/tasks.css">
+</head>
+<body>
+  <div id="app-root" aria-busy="true">
+    <div class="app-loading" role="status">Laying out your planner…</div>
+  </div>
+
+  <template id="tasks-template">
+    <div class="tasks-page">
+      <header class="tasks-heading">
+        <div>
+          <p class="page-heading__eyebrow">Main / Assignments</p>
+          <h1>Tasks</h1>
+          <div class="task-summary" aria-label="Task summary">
+            <span><strong data-open-count>0</strong> to do</span>
+            <span><strong data-complete-count>0</strong> complete</span>
+            <span class="task-summary__overdue"><strong data-overdue-count>0</strong> overdue</span>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="button" data-new-task>
+          <span aria-hidden="true">＋</span> New task
+        </button>
+      </header>
+
+      <section class="task-category-strip" aria-label="Task categories">
+        <span class="task-category-strip__label">Subjects</span>
+        <div class="task-category-chips" data-category-chips></div>
+      </section>
+
+      <section class="task-toolbar" aria-label="Search and filter tasks">
+        <label class="task-search">
+          <span class="visually-hidden">Search tasks</span>
+          <span aria-hidden="true">⌕</span>
+          <input class="form-input" type="search" placeholder="Search assignments…" data-task-search>
+        </label>
+        <label>
+          <span class="visually-hidden">Filter by category</span>
+          <select class="form-select" data-category-filter>
+            <option value="all">All subjects</option>
+            <option>Programming</option>
+            <option>Mathematics</option>
+            <option>English</option>
+            <option>Database Systems</option>
+            <option>Computer Networks</option>
+            <option>Personal</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>
+          <span class="visually-hidden">Filter by status</span>
+          <select class="form-select" data-status-filter>
+            <option value="all">All tasks</option>
+            <option value="todo">To do</option>
+            <option value="today">Due today</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="completed">Completed</option>
+          </select>
+        </label>
+        <label>
+          <span class="visually-hidden">Filter by priority</span>
+          <select class="form-select" data-priority-filter>
+            <option value="all">All priorities</option>
+            <option value="high">High priority</option>
+            <option value="medium">Medium priority</option>
+            <option value="low">Low priority</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="task-board" aria-label="Your task planner">
+        <div data-task-groups></div>
+        <div class="tasks-empty" data-tasks-empty hidden>
+          <span aria-hidden="true">☷</span>
+          <h2>No tasks match these filters</h2>
+          <p>Try a different search or add a new task to your planner.</p>
+        </div>
+      </section>
+
+      <dialog class="task-dialog card" data-task-dialog aria-labelledby="task-dialog-title">
+        <form class="task-form" data-task-form>
+          <header class="task-dialog__heading">
+            <div>
+              <p class="page-heading__eyebrow">A small step for today</p>
+              <h2 id="task-dialog-title" data-task-dialog-title>New task</h2>
+            </div>
+            <button class="icon-button" type="button" data-close-task aria-label="Close task editor">×</button>
+          </header>
+          <label class="form-group">
+            <span class="form-label">Task</span>
+            <input class="form-input" name="title" maxlength="120" required placeholder="What would you like to finish?">
+          </label>
+          <label class="form-group">
+            <span class="form-label">A little more detail <span class="task-form__optional">(optional)</span></span>
+            <textarea class="form-input task-form__description" name="description" maxlength="500"
+              placeholder="Add a note to help future-you…"></textarea>
+          </label>
+          <div class="task-form__row">
+            <label class="form-group">
+              <span class="form-label">Subject</span>
+              <select class="form-select" name="category">
+                <option>Programming</option>
+                <option>Mathematics</option>
+                <option>English</option>
+                <option>Database Systems</option>
+                <option>Computer Networks</option>
+                <option>Personal</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label class="form-group">
+              <span class="form-label">Priority</span>
+              <select class="form-select" name="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+          </div>
+          <label class="form-group">
+            <span class="form-label">Due date <span class="task-form__optional">(optional)</span></span>
+            <input class="form-input" type="date" name="dueDate">
+          </label>
+          <div class="task-form__actions">
+            <button class="btn btn-secondary" type="button" data-close-task>Cancel</button>
+            <button class="btn btn-primary" type="submit">Save task</button>
+          </div>
+        </form>
+      </dialog>
+    </div>
+  </template>
+
+  <script type="module" src="js/pages/tasks.js"></script>
+</body>
+</html>

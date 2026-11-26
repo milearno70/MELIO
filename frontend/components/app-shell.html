@@ -1,0 +1,53 @@
+<div class="app-frame" data-app-frame data-collapsed="false" data-mobile-open="false">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <aside class="sidebar" id="app-sidebar" aria-label="Application sidebar">
+    <div class="sidebar__brand">
+      <a class="sidebar__brand-link" href="index.html" aria-label="MELIO dashboard">
+        <img src="assets/images/logo.png" alt="MELIO">
+        <span class="sidebar__brand-mark" aria-hidden="true">M</span>
+      </a>
+    </div>
+
+    <button
+      class="sidebar__collapse"
+      type="button"
+      data-sidebar-toggle
+      aria-controls="primary-navigation"
+      aria-expanded="true"
+      aria-label="Collapse sidebar"
+      title="Collapse sidebar">
+    </button>
+
+    <nav class="sidebar__nav" id="primary-navigation" aria-label="Primary navigation">
+      <ul class="sidebar__list" data-sidebar-items></ul>
+    </nav>
+
+    <div class="sidebar__footer">
+      <a class="sidebar__settings" href="settings.html" title="Settings">
+        <span class="sidebar__icon" data-icon="settings" aria-hidden="true"></span>
+        <span class="sidebar__label">Settings</span>
+      </a>
+      <div class="sidebar__profile" role="group" aria-label="Profile: Mely, Level 3 learner">
+        <span class="sidebar__avatar" aria-hidden="true">M</span>
+        <span class="sidebar__profile-copy">
+          <span>Mely</span>
+          <span>Level 3 learner</span>
+        </span>
+      </div>
+    </div>
+  </aside>
+
+  <button
+    class="sidebar__backdrop"
+    type="button"
+    data-sidebar-backdrop
+    aria-label="Close navigation"
+    hidden>
+  </button>
+
+  <div class="app-main">
+    <header class="app-header" data-app-header aria-label="Application header"></header>
+    <main class="main-content" id="main-content" data-shell-content tabindex="-1"></main>
+  </div>
+</div>

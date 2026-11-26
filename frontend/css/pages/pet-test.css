@@ -1,0 +1,204 @@
+.pet-test-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: start center;
+  padding: clamp(1rem, 4vw, 3rem);
+}
+
+.pet-editor {
+  display: grid;
+  width: min(100%, 74rem);
+  grid-template-columns: minmax(18rem, 0.85fr) minmax(0, 1.15fr);
+  align-items: start;
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+.pet-editor__header {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.pet-editor__header h1 {
+  color: var(--color-primary);
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.pet-editor__header p {
+  color: var(--color-ink-muted);
+}
+
+.pet-stage {
+  position: sticky;
+  top: 1.5rem;
+  display: grid;
+  min-height: 29rem;
+  place-items: center;
+  align-content: center;
+  gap: 1.25rem;
+  padding: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1.5rem 1.8rem 1.4rem 1.75rem;
+  background-color: var(--color-paper);
+  background-image:
+    linear-gradient(var(--color-rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-rule) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+  box-shadow: var(--shadow-paper);
+}
+
+.pet-stage::before {
+  position: absolute;
+  top: -0.5rem;
+  left: 44%;
+  width: 4.5rem;
+  height: 1rem;
+  transform: rotate(-2deg);
+  background: rgba(247, 158, 187, 0.65);
+  box-shadow: var(--shadow-tape);
+  content: "";
+}
+
+.pet {
+  position: relative;
+  width: min(100%, 24rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(43, 129, 144, 0.22);
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffefa 0 64%, rgba(201, 235, 216, 0.6) 65% 100%);
+  box-shadow: inset 0 0 0 0.75rem rgba(255, 255, 255, 0.6), var(--shadow-card);
+}
+
+.pet img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  image-rendering: pixelated;
+}
+
+.pet-caption {
+  max-width: 24rem;
+  color: var(--color-ink-muted);
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.group {
+  min-width: 0;
+  padding: 1.1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem 1.25rem 0.95rem 1.2rem;
+  background: rgba(255, 254, 250, 0.9);
+  box-shadow: var(--shadow-card);
+}
+
+.group h2 {
+  margin-bottom: 0.75rem;
+  color: var(--color-primary);
+  font-family: var(--font-hand);
+  font-size: 1.5rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.controls button {
+  min-height: 2.2rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.65rem 0.8rem 0.6rem 0.8rem;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.controls button:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.controls button.active {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-hover);
+  box-shadow: inset 0 -2px rgba(43, 129, 144, 0.12);
+}
+
+.controls button.swatch {
+  width: 2.2rem;
+  min-height: 2.2rem;
+  padding: 0;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--color-border);
+}
+
+.controls button.swatch.active {
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+#color-group[hidden] {
+  display: none;
+}
+
+#info {
+  grid-column: 1 / -1;
+  padding: 0.65rem 0.85rem;
+  border: 1px dashed rgba(43, 129, 144, 0.3);
+  border-radius: 0.65rem;
+  background: var(--color-blue-soft);
+  color: var(--color-ink-muted);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 760px) {
+  .pet-test-page {
+    padding: 1rem;
+  }
+
+  .pet-editor {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pet-editor__header {
+    display: block;
+  }
+
+  .pet-stage {
+    position: relative;
+    top: auto;
+    min-height: 0;
+    padding: 1.25rem;
+  }
+
+  .pet {
+    width: min(100%, 20rem);
+  }
+}
+
+@media (max-width: 460px) {
+  .controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
