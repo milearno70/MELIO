@@ -21,10 +21,9 @@ public sealed class TasksController(AppDbContext dbContext) : ControllerBase
 
         var tasks = await dbContext.Tasks.AsNoTracking()
             .Where(task => task.UserId == userId)
-            .OrderByDescending(task => task.CreatedAt)
             .Select(task => ToResponse(task))
             .ToListAsync(cancellationToken);
-        return Ok(tasks);
+        return Ok(tasks.OrderByDescending(task => task.CreatedAt));
     }
 
     [HttpGet("{id:guid}", Name = nameof(GetById))]
