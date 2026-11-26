@@ -15,6 +15,18 @@ var jwtOptions = builder.Configuration.GetSection(JwtOptions.SectionName).Get<Jw
     ?? throw new InvalidOperationException("JWT configuration is missing.");
 var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
     ?? [];
+if (builder.Environment.IsProduction() &&
+    (allowedOrigins.Length == 0 ||
+     allowedOrigins.Any(origin =>
+         !Uri.TryCreate(origin, UriKind.Absolute, out var uri) ||
+         uri.Scheme != Uri.UriSchemeHttps ||
+         !string.IsNullOrEmpty(uri.UserInfo) ||
+         !string.Equals(origin, uri.GetLeftPart(UriPartial.Authority), StringComparison.OrdinalIgnoreCase))))
+{
+    throw new InvalidOperationException(
+        "Production requires Cors:AllowedOrigins to contain one or more HTTPS origins without paths.");
+}
+
 var signingKey = Encoding.UTF8.GetBytes(jwtOptions.Key);
 if (signingKey.Length < 32)
 {
