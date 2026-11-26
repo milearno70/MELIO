@@ -6,7 +6,7 @@ using MELIO.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.Sqlite;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace MELIO.Api.Controllers;
@@ -95,5 +95,5 @@ public sealed class AuthController(
         new(user.Id, user.Name, user.Email, user.CreatedAt);
 
     private static bool IsEmailUniqueViolation(DbUpdateException exception) =>
-        exception.InnerException is SqliteException { SqliteExtendedErrorCode: 2067 };
+        exception.InnerException is SqlException { Number: 2601 or 2627 };
 }

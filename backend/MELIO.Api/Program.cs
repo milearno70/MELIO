@@ -21,7 +21,7 @@ if (signingKey.Length < 32)
     throw new InvalidOperationException("Set Jwt:Key in user-secrets to a value of at least 32 bytes.");
 }
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(connectionString));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddCors(options =>
