@@ -13,7 +13,7 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbCon
         var user = modelBuilder.Entity<User>();
         user.HasKey(entity => entity.Id);
         user.Property(entity => entity.Name).IsRequired().HasMaxLength(100);
-        user.Property(entity => entity.Email).IsRequired().HasMaxLength(254).UseCollation("NOCASE");
+        user.Property(entity => entity.Email).IsRequired().HasMaxLength(254).UseCollation("SQL_Latin1_General_CP1_CI_AS");
         user.HasIndex(entity => entity.Email).IsUnique();
         user.Property(entity => entity.PasswordHash).IsRequired();
         user.Property(entity => entity.CreatedAt).IsRequired();
