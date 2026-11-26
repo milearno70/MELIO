@@ -1,6 +1,80 @@
 @MELIO.Api_HostAddress = http://localhost:5030
 
-GET {{MELIO.Api_HostAddress}}/weatherforecast/
+### Register
+POST {{MELIO.Api_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Mely",
+  "email": "mely@example.com",
+  "password": "ChangeMe123!"
+}
+
+###
+
+### Login
+# @name login
+POST {{MELIO.Api_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "mely@example.com",
+  "password": "ChangeMe123!"
+}
+
+###
+
+@authToken = {{login.response.body.accessToken}}
+
+### Current user
+GET {{MELIO.Api_HostAddress}}/api/auth/me
 Accept: application/json
+Authorization: Bearer {{authToken}}
+
+###
+
+### List tasks
+GET {{MELIO.Api_HostAddress}}/api/tasks
+Accept: application/json
+Authorization: Bearer {{authToken}}
+
+###
+
+### Create a task
+# @name createTask
+POST {{MELIO.Api_HostAddress}}/api/tasks
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "title": "Review today's notes",
+  "category": "Programming"
+}
+
+###
+
+@taskId = {{createTask.response.body.id}}
+
+### Get a task
+GET {{MELIO.Api_HostAddress}}/api/tasks/{{taskId}}
+Accept: application/json
+Authorization: Bearer {{authToken}}
+
+###
+
+### Complete a task
+PATCH {{MELIO.Api_HostAddress}}/api/tasks/{{taskId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "isCompleted": true
+}
+
+###
+
+### Delete a task
+DELETE {{MELIO.Api_HostAddress}}/api/tasks/{{taskId}}
+Authorization: Bearer {{authToken}}
 
 ###

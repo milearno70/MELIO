@@ -7,6 +7,7 @@ const ICON_PATHS = {
   pet: '<path d="M12 3 14.5 8l5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/><path d="M8 21h8"/>',
   tasks: '<path d="m4 6 1.5 1.5L8 5M11 6h9M4 12l1.5 1.5L8 11M11 12h9M4 18l1.5 1.5L8 17M11 18h9"/>',
   settings: '<circle cx="12" cy="12" r="2.6"/><path d="M12 2.5v3m0 13v3m-9.5-9.5h3m13 0h3M4.9 4.9 7 7m10 10 2.1 2.1M4.9 19.1 7 17m10-10 2.1-2.1"/>',
+  logout: '<path d="M10 17l5-5-5-5M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/>',
   menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
   chevronLeft: '<path d="m14 5-7 7 7 7"/>',
   chevronRight: '<path d="m10 5 7 7-7 7"/>',

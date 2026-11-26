@@ -62,7 +62,7 @@ export function saveNotificationPreferences(preferences) {
   });
 }
 
-export function applyAppPreferences(root) {
+export function applyAppPreferences(root, currentUser) {
   const appearance = readAppearancePreferences();
   const profile = readUserProfile();
   const documentRoot = root.ownerDocument.documentElement;
@@ -72,9 +72,12 @@ export function applyAppPreferences(root) {
 
   const profileGroup = root.querySelector(".sidebar__profile");
   if (!profileGroup) return;
-  const name = profileGroup.querySelector(".sidebar__profile-copy span:first-child");
+  const name = profileGroup.querySelector("[data-profile-name]");
   const avatar = profileGroup.querySelector(".sidebar__avatar");
-  profileGroup.setAttribute("aria-label", `Profile: ${profile.name}, Level 3 learner`);
-  name.textContent = profile.name;
-  avatar.textContent = Array.from(profile.name)[0].toLocaleUpperCase();
+  const displayName = typeof currentUser?.name === "string" && currentUser.name.trim()
+    ? currentUser.name.trim()
+    : profile.name;
+  profileGroup.setAttribute("aria-label", `Profile: ${displayName}, Level 3 learner`);
+  name.textContent = displayName;
+  avatar.textContent = Array.from(displayName)[0].toLocaleUpperCase();
 }

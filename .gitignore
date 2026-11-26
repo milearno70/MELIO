@@ -29,6 +29,9 @@ logs/
 *.mdf
 *.ldf
 *.bak
+*.db
+*.db-shm
+*.db-wal
 
 # ===== Node (lazım olarsa) =====
 node_modules/

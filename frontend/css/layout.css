@@ -167,6 +167,13 @@
   transform: translateX(2px);
 }
 
+.sidebar__logout {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
 .sidebar__link[aria-current="page"] {
   background: var(--nav-active-bg, var(--color-primary-soft));
   box-shadow: inset 3px 0 var(--color-primary);

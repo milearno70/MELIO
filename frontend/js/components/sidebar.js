@@ -1,5 +1,6 @@
 import { icon } from "./icons.js";
 import { readBooleanPreference, writeBooleanPreference } from "../core/storage.js";
+import { clearAuthToken } from "../api.js";
 
 const NAV_ITEMS = [
   { id: "dashboard", label: "Dashboard", href: "index.html", icon: "dashboard" },
@@ -19,8 +20,11 @@ export function initializeSidebar(root, activePage) {
   const backdrop = root.querySelector("[data-sidebar-backdrop]");
   const settingsIcon = root.querySelector('[data-icon="settings"]');
   const settingsLink = root.querySelector(".sidebar__settings");
+  const logoutButton = root.querySelector("[data-logout]");
+  const logoutIcon = root.querySelector('[data-icon="logout"]');
 
-  if (!frame || !sidebar || !navigation || !collapseButton || !backdrop || !settingsIcon || !settingsLink) {
+  if (!frame || !sidebar || !navigation || !collapseButton || !backdrop ||
+      !settingsIcon || !settingsLink || !logoutButton || !logoutIcon) {
     throw new Error("The MELIO application shell is missing sidebar elements.");
   }
 
@@ -28,6 +32,7 @@ export function initializeSidebar(root, activePage) {
   else settingsLink.removeAttribute("aria-current");
 
   settingsIcon.innerHTML = icon("settings", "sidebar__icon");
+  logoutIcon.innerHTML = icon("logout", "sidebar__icon");
   navigation.innerHTML = NAV_ITEMS.map((item) => {
     const isActive = item.id === activePage;
     return `
@@ -62,6 +67,12 @@ export function initializeSidebar(root, activePage) {
 
   backdrop.addEventListener("click", () => {
     root.dispatchEvent(new CustomEvent("melio:close-navigation"));
+  });
+  logoutButton.addEventListener("click", () => {
+    if (!clearAuthToken()) {
+      console.error("MELIO could not clear every saved authentication token before logging out.");
+    }
+    window.location.replace("login.html");
   });
   root.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && frame.dataset.mobileOpen === "true") {

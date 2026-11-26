@@ -30,9 +30,10 @@ async function startDashboard() {
   await mountAppShell({
     root,
     contentTemplate,
-    activePage: "dashboard"
+    activePage: "dashboard",
+    currentUser
   });
-  initializeDashboard(root, currentUser);
+  await initializeDashboard(root, currentUser);
 }
 
 startDashboard().catch((error) => {

@@ -103,7 +103,7 @@
             <div class="metric-tile"><span>Studied</span><strong>0h 0m</strong></div>
             <div class="metric-tile"><span>Sessions</span><strong>0</strong></div>
             <div class="metric-tile"><span>Daily goal</span><strong>2h</strong></div>
-            <div class="metric-tile"><span>Tasks done</span><strong>0/3</strong></div>
+            <div class="metric-tile"><span>Tasks done</span><strong data-task-progress>0/0</strong></div>
           </div>
         </section>
 
@@ -134,27 +134,29 @@
             <h2 id="tasks-title">Today’s tasks</h2>
             <a class="dashboard-card__link" href="tasks.html">+5 pts each</a>
           </header>
-          <ul class="task-list">
-            <li class="task-row">
-              <span class="task-row__check" aria-hidden="true"></span>
-              <span class="task-row__title">Finish UI wireframe for MELIO</span>
-              <span class="tag">Design</span>
-              <span class="task-row__points">+5</span>
-            </li>
-            <li class="task-row">
-              <span class="task-row__check" aria-hidden="true"></span>
-              <span class="task-row__title">Practice IELTS reading passage</span>
-              <span class="tag" style="background: var(--color-pink-soft)">English</span>
-              <span class="task-row__points">+5</span>
-            </li>
-            <li class="task-row">
-              <span class="task-row__check" aria-hidden="true"></span>
-              <span class="task-row__title">Review JavaScript array methods</span>
-              <span class="tag" style="background: var(--color-mint)">Programming</span>
-              <span class="task-row__points">+5</span>
-            </li>
+          <form class="dashboard-task-form" data-task-form>
+            <label class="visually-hidden" for="dashboard-task-title">Task title</label>
+            <input class="form-input" id="dashboard-task-title" name="title" type="text"
+              maxlength="120" placeholder="Add a little task…" required>
+            <label class="visually-hidden" for="dashboard-task-category">Task category</label>
+            <select class="form-input" id="dashboard-task-category" name="category" required>
+              <option>Programming</option>
+              <option>Design</option>
+              <option>English</option>
+              <option>Mathematics</option>
+              <option>Personal</option>
+              <option>Other</option>
+            </select>
+            <button class="btn btn-primary btn-small" type="submit">Add</button>
+          </form>
+          <p class="dashboard-footnote dashboard-task-loading" data-task-loading role="status">Loading your tasks…</p>
+          <p class="dashboard-footnote dashboard-task-empty" data-task-empty hidden>No tasks yet. Add one small step above.</p>
+          <p class="dashboard-footnote dashboard-task-error" data-task-error role="alert" hidden>
+            <span data-task-error-message></span>
+            <button class="dashboard-task-retry" type="button" data-task-retry>Try again</button>
+          </p>
+          <ul class="task-list" data-task-list aria-label="Your tasks" aria-busy="true">
           </ul>
-          <p class="dashboard-footnote">Nothing else due today — enjoy the breathing room.</p>
         </section>
 
         <nav class="dashboard-shortcuts" aria-label="Study tools">

@@ -34,12 +34,16 @@ export function setAuthToken(token, remember = false) {
 }
 
 export function clearAuthToken() {
-  try {
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.localStorage.removeItem(TOKEN_KEY);
-  } catch (error) {
-    console.error("MELIO could not clear the authentication token.", error);
+  let cleared = true;
+  for (const storageName of ["sessionStorage", "localStorage"]) {
+    try {
+      window[storageName].removeItem(TOKEN_KEY);
+    } catch (error) {
+      cleared = false;
+      console.error("MELIO could not clear the authentication token.", error);
+    }
   }
+  return cleared;
 }
 
 function errorMessage(body, status) {

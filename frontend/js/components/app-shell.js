@@ -2,7 +2,7 @@ import { initializeHeader } from "./header.js";
 import { initializeSidebar } from "./sidebar.js";
 import { applyAppPreferences } from "../core/preferences.js";
 
-export async function mountAppShell({ root, contentTemplate, activePage }) {
+export async function mountAppShell({ root, contentTemplate, activePage, currentUser }) {
   if (!(contentTemplate instanceof HTMLTemplateElement)) {
     throw new TypeError("A page content template is required to mount the MELIO shell.");
   }
@@ -22,6 +22,6 @@ export async function mountAppShell({ root, contentTemplate, activePage }) {
   contentTarget.append(contentTemplate.content.cloneNode(true));
   initializeSidebar(root, activePage);
   initializeHeader(root);
-  applyAppPreferences(root);
+  applyAppPreferences(root, currentUser);
   root.setAttribute("aria-busy", "false");
 }

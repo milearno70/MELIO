@@ -1,4 +1,5 @@
 import { mountAppShell } from "../components/app-shell.js";
+import { ApiError, apiRequest, clearAuthToken, getAuthToken } from "../api.js";
 
 function showStartupError(root, pageName, error) {
   console.error(`MELIO could not start the ${pageName} page.`, error);
@@ -25,7 +26,27 @@ export function startAppPage({ templateId, activePage, pageName, initialize }) {
     return;
   }
 
-  mountAppShell({ root, contentTemplate, activePage })
-    .then(() => initialize(root))
-    .catch((error) => showStartupError(root, name, error));
+  async function startPage() {
+    if (!getAuthToken()) {
+      window.location.replace("login.html");
+      return;
+    }
+
+    let currentUser;
+    try {
+      currentUser = await apiRequest("/api/auth/me");
+    } catch (error) {
+      if (error instanceof ApiError && error.status === 401) {
+        clearAuthToken();
+        window.location.replace("login.html");
+        return;
+      }
+      throw error;
+    }
+
+    await mountAppShell({ root, contentTemplate, activePage, currentUser });
+    initialize(root, currentUser);
+  }
+
+  startPage().catch((error) => showStartupError(root, name, error));
 }

@@ -28,10 +28,14 @@
         <span class="sidebar__icon" data-icon="settings" aria-hidden="true"></span>
         <span class="sidebar__label">Settings</span>
       </a>
-      <div class="sidebar__profile" role="group" aria-label="Profile: Mely, Level 3 learner">
+      <button class="sidebar__settings sidebar__logout" type="button" data-logout>
+        <span class="sidebar__icon" data-icon="logout" aria-hidden="true"></span>
+        <span class="sidebar__label">Log out</span>
+      </button>
+      <div class="sidebar__profile" role="group" aria-label="User profile">
         <span class="sidebar__avatar" aria-hidden="true">M</span>
         <span class="sidebar__profile-copy">
-          <span>Mely</span>
+          <span data-profile-name></span>
           <span>Level 3 learner</span>
         </span>
       </div>
