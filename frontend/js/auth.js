@@ -3,6 +3,91 @@ import { apiRequest, setAuthToken } from "./api.js";
 (() => {
   const loginForm = document.getElementById("login-form");
   const registerForm = document.getElementById("register-form");
+  if (loginForm) {
+    const email = loginForm.querySelector("#email");
+    const password = loginForm.querySelector("#password");
+    const formError = document.getElementById("form-error");
+    const emailError = document.getElementById("email-error");
+    const passwordError = document.getElementById("password-error");
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const fields = [
+      { input: email, error: emailError },
+      { input: password, error: passwordError }
+    ];
+
+    function clearFieldError(field) {
+      if (!field.input) return;
+      if (field.error) field.error.textContent = "";
+      field.input.classList.remove("is-invalid");
+      field.input.removeAttribute("aria-invalid");
+    }
+
+    function validateField(field) {
+      if (!field.input) return false;
+
+      const value = field.input.value.trim();
+      let message = "";
+      if (!value) {
+        message = field.input === email
+          ? "Please enter your email."
+          : "Please enter your password.";
+      } else if (field.input === email && !emailPattern.test(value)) {
+        message = "Please enter a valid email address.";
+      }
+
+      if (field.error) field.error.textContent = message;
+      field.input.classList.toggle("is-invalid", Boolean(message));
+      field.input.setAttribute("aria-invalid", String(Boolean(message)));
+      if (field.error) {
+        field.input.setAttribute("aria-describedby", field.error.id);
+      }
+      return !message;
+    }
+
+    fields.forEach((field) => {
+      if (!field.input) return;
+      field.input.addEventListener("input", () => {
+        clearFieldError(field);
+        if (formError) {
+          formError.textContent = "";
+          formError.hidden = true;
+        }
+      });
+    });
+
+    const passwordToggle = loginForm.querySelector(
+      '#toggle-password, [data-toggle-password="password"]'
+    );
+    if (passwordToggle && password) {
+      passwordToggle.addEventListener("click", () => {
+        const show = password.type === "password";
+        password.type = show ? "text" : "password";
+        passwordToggle.setAttribute("aria-label", show ? "Hide password" : "Show password");
+        passwordToggle.setAttribute("aria-pressed", String(show));
+      });
+    }
+
+    loginForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (formError) {
+        formError.textContent = "";
+        formError.hidden = true;
+      }
+
+      const invalidFields = fields.filter((field) => !validateField(field));
+      if (invalidFields.length) {
+        if (invalidFields[0].input) invalidFields[0].input.focus();
+        return;
+      }
+
+      if (formError) {
+        formError.textContent = "Login is not available yet.";
+        formError.hidden = false;
+      }
+    });
+    return;
+  }
+
   const form = loginForm || registerForm;
   if (!form) return;
 
